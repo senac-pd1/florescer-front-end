@@ -1,8 +1,11 @@
+import Header from "../../containers/Header/Header";
+import { ContainerHomePage } from "./HomePageStyle";
+
 const HomePage = () => {
   return (
-    <>
-      <h2>Home Page</h2>
-    </>
+    <ContainerHomePage>
+      <Header />
+    </ContainerHomePage>
   );
 };
 

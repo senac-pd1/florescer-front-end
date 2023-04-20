@@ -12,7 +12,7 @@ body {
   background: ${colorsVariables.white};
   color: ${colorsVariables.black};
   min-height: 100vh;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 button {
