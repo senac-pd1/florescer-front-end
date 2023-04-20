@@ -9,3 +9,8 @@ export const colorsVariables = {
   lightGrey: "#CCCCCC",
   mediumGrey: "#969696",
 };
+
+export const uiVariables = {
+  borderRadius: "10px",
+  buttonInputHeight: "60px",
+};
