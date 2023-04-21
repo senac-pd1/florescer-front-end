@@ -52,9 +52,10 @@ export const NavbarContainer = styled.div<{ open: boolean }>`
     ul li {
       margin-top: 15px;
       padding: 10px;
-      :hover {
-        background-color: ${colorsVariables.white};
-      }
+      padding-left: 25px;
+    }
+    ul li:first-child {
+      margin-top: 55px;
     }
   }
 `;

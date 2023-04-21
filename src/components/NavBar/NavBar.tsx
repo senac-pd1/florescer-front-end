@@ -1,6 +1,7 @@
 import { LogoHeader, NavbarContainer } from "./NavBarStyle";
 import { motion } from "framer-motion";
 import logo from "./../../../src/assets/logoHeader.svg";
+import { Link } from "react-router-dom";
 interface NavBarProps {
   open: boolean;
 }
@@ -37,11 +38,11 @@ const NavBar = ({ open }: NavBarProps) => {
               Novas plantas
             </a>
           </motion.li>
-          {/* <motion.li whileTap={{ scale: 1.1 }}>
-            <a href="#newsletter" onClick={handleClick}>
-              Newsletter
-            </a>
-          </motion.li> */}
+          <motion.li whileTap={{ scale: 1.1 }}>
+            <Link to="/profile">
+              <a>Perfil</a>
+            </Link>
+          </motion.li>
         </ul>
       </nav>
     </NavbarContainer>
