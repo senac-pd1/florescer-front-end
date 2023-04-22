@@ -23,7 +23,7 @@ git commit -m "descreva brevemente o que foi feito"
 4. Depois de finalizada sua tarefa faça um push
 
 ```bash
-git push
+git push origin nomeDaBranchQueVoceEsta
 ```
 
 5.  Agora abra seu github no navegador e vá até o repositório do florescer e peça um pull request e aguarda as correções ou merge.
