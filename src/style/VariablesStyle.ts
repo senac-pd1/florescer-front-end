@@ -15,3 +15,13 @@ export const uiVariables = {
   borderRadius: "10px",
   buttonInputHeight: "60px",
 };
+
+export const devices = {
+  mobileS: `(max-width: $320px)`,
+  mobileM: `(max-width: $375px)`,
+  mobileL: `(max-width: 425px)`,
+  tabletM: `(max-width: 500px)`,
+  tablet: `(max-width: 700px)`,
+  laptop: `(max-width: 900px)`,
+  laptopL: `(max-width: 1200px)`,
+};

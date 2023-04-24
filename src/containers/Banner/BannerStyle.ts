@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { colorsVariables } from "./../../style/VariablesStyle";
+import { colorsVariables, devices } from "./../../style/VariablesStyle";
 
 const moveRight = keyframes`  
 0% {
@@ -22,6 +22,7 @@ const moveLeft = keyframes`
 }`;
 
 export const BannerImage = styled.div`
+  margin-top: 60px;
   img {
     width: 100%;
   }
@@ -33,13 +34,16 @@ export const BannerText = styled.div`
   top: 250px;
   line-height: 30px;
   height: 30px;
-  @media (max-width: 885px) {
+  @media ${devices.laptopL} {
+    top: 175px;
+  }
+  @media ${devices.laptop} {
     top: 150px;
   }
-  @media (max-width: 669px) {
+  @media ${devices.tablet} {
     top: 125px;
   }
-  @media (max-width: 477px) {
+  @media ${devices.tabletM} {
     top: 100px;
   }
 `;
@@ -49,8 +53,16 @@ export const Title = styled.div`
     animation-duration: 0.7s;
     font-weight: lighter;
     font-size: 50px;
-    @media (max-width: 669px) {
+    @media ${devices.laptop} {
+      font-size: 40px;
+      margin-top: 15px;
+    }
+    @media ${devices.tablet} {
       font-size: 30px;
+    }
+    @media ${devices.tabletM} {
+      font-size: 20px;
+      margin-top: 7px;
     }
   }
 `;
@@ -61,9 +73,17 @@ export const TitleTwo = styled.div`
     font-weight: lighter;
     font-size: 50px;
     margin-top: 30px;
-    @media (max-width: 669px) {
+    @media ${devices.laptop} {
+      font-size: 40px;
+      margin-top: 15px;
+    }
+    @media ${devices.tablet} {
       font-size: 30px;
       margin-top: 10px;
+    }
+    @media ${devices.tabletM} {
+      font-size: 20px;
+      margin-top: 7px;
     }
   }
 `;
@@ -72,8 +92,15 @@ export const TypeWriterHeader = styled.div`
   color: ${colorsVariables.darkGreen};
   margin: 40px 0;
   font-weight: regular;
-  @media (max-width: 669px) {
-    font-size: 35px;
-    margin: 10px;
+  @media ${devices.laptop} {
+    font-size: 40px;
+    margin-top: 15px;
+  }
+  @media ${devices.tablet} {
+    font-size: 30px;
+  }
+  @media ${devices.tabletM} {
+    font-size: 20px;
+    margin-top: 7px;
   }
 `;

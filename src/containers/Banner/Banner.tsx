@@ -14,7 +14,6 @@ const Banner = () => {
     title: "Para quem gosta",
     titleTwo: "de um ambiente",
   });
-  //Para quem gosta de um ambiente saudável, florido e verde.
   return (
     <>
       <BannerImage id="home">
