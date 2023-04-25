@@ -1,5 +1,5 @@
 export const colorsVariables = {
-  darkGreen: "#102611",
+  darkGreen: "#001801",
   green: "#1B5924",
   mediumGreen: "#308C50",
   lightGreen: "#BAD9C2",

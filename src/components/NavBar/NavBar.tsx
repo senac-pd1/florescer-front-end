@@ -39,9 +39,7 @@ const NavBar = ({ open }: NavBarProps) => {
             </a>
           </motion.li>
           <motion.li whileTap={{ scale: 1.1 }}>
-            <Link to="/profile">
-              <a>Perfil</a>
-            </Link>
+            <Link to="/profile">Perfil</Link>
           </motion.li>
         </ul>
       </nav>

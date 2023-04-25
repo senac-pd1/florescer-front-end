@@ -22,9 +22,11 @@ const moveLeft = keyframes`
 }`;
 
 export const BannerImage = styled.div`
-  margin-top: 60px;
   img {
     width: 100%;
+  }
+  @media ${devices.tablet} {
+    margin-top: 60px;
   }
 `;
 export const BannerText = styled.div`
