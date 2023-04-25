@@ -1,5 +1,5 @@
 export const colorsVariables = {
-  darkGreen: "#102611",
+  darkGreen: "#001801",
   green: "#1B5924",
   mediumGreen: "#308C50",
   lightGreen: "#BAD9C2",
@@ -14,4 +14,14 @@ export const colorsVariables = {
 export const uiVariables = {
   borderRadius: "10px",
   buttonInputHeight: "60px",
+};
+
+export const devices = {
+  mobileS: `(max-width: $320px)`,
+  mobileM: `(max-width: $375px)`,
+  mobileL: `(max-width: 425px)`,
+  tabletM: `(max-width: 500px)`,
+  tablet: `(max-width: 700px)`,
+  laptop: `(max-width: 900px)`,
+  laptopL: `(max-width: 1200px)`,
 };
