@@ -1,59 +1,45 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { ButtonSearch, DivSearchBar, InputSearch } from "./SearchBarStyle";
+import {
+  ButtonSearch,
+  DivSearchBar,
+  InputSearch,
+  MensasageError,
+} from "./SearchBarStyle";
 import { VscSearch } from "react-icons/vsc";
-
-interface Flower {
-  name: string;
-  img: string;
-}
+import { searchFlowers, Flower } from "../../services/Api";
 
 interface SearchBarProps {
-  onSearch: (flower: Flower | null, error: string) => void;
+  onSearch: (flowers: Flower[], error: string) => void;
 }
 
-const SearchBar = ({ onSearch }: SearchBarProps) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
+    setErrorMessage("");
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!query) {
-      onSearch(null, "Please enter a search query.");
+      setErrorMessage("Por favor, digite algo na barra de pesquisa.");
+      onSearch([], "");
       return;
     }
 
-    const formattedQuery = query.trim().toLowerCase();
-    const apiUrl = `https://house-plants2.p.rapidapi.com/Common-Name`;
-
-    fetch(apiUrl, {
-      headers: {
-        "X-RapidAPI-Key": "560e7b5defmsh91395a5338028e2p169d4fjsn5d8167d2a289",
-        "X-RapidAPI-Host": "house-plants2.p.rapidapi.com",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const flower = data.find((flower: { [x: string]: any }) =>
-          flower["Common name"].includes(formattedQuery)
-        );
-        if (flower) {
-          const flowerData = {
-            name: flower["Common name"],
-            img: flower.Img,
-          };
-          onSearch(flowerData, "");
-        } else {
-          onSearch(null, "Não foi encontrado nenhuma planta.");
-        }
-      })
-      .catch((error) => {
-        onSearch(null, "Ocorreu um erro, por favor, tente novamente!");
-      });
+    try {
+      const flowers = await searchFlowers(query);
+      if (flowers.length > 0) {
+        onSearch(flowers, "");
+      } else {
+        onSearch([], "Não foi encontrada nenhuma planta.");
+      }
+    } catch (error) {
+      onSearch([], "Ocorreu um erro, tente novamente!");
+    }
   };
 
   return (
@@ -69,6 +55,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
           <VscSearch />
         </ButtonSearch>
       </form>
+      {errorMessage && <MensasageError>{errorMessage}</MensasageError>}
     </DivSearchBar>
   );
 };

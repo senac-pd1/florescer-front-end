@@ -1,29 +1,56 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "https://house-plants2.p.rapidapi.com",
-  headers: {
-    "X-RapidAPI-Key": "560e7b5defmsh91395a5338028e2p169d4fjsn5d8167d2a289",
-    "X-RapidAPI-Host": "house-plants2.p.rapidapi.com",
-    "Content-Type": "application/json",
-  },
-});
-
 export interface Flower {
   name: string;
   img: string;
 }
 
-export async function getFlowerNamesAndImages(): Promise<Flower[]> {
+export const getFlowerNamesAndImages = async (): Promise<Flower[]> => {
   try {
-    const response = await axios.get("/all-lite");
-    const flowers = response.data.slice(0, 3);
-    const flowerData = flowers.map((flower: { [x: string]: any; Img: any }) => {
-      return { name: flower["Common name"], img: flower.Img };
-    });
-    return flowerData;
+    const response = await axios.get(
+      "https://house-plants2.p.rapidapi.com/all-lite",
+      {
+        headers: {
+          "X-RapidAPI-Key":
+            "98764d8283msh44e3045e871b413p1ae8b4jsne57ce0a4493c",
+          "X-RapidAPI-Host": "house-plants2.p.rapidapi.com",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data.slice(0, 8).map((flower: any) => ({
+      name: flower["Common name"],
+      img: flower.Img,
+    }));
+    return data;
   } catch (error) {
     console.error(error);
     return [];
   }
-}
+};
+
+export const searchFlowers = async (query: string): Promise<Flower[]> => {
+  try {
+    const response = await axios.get(
+      `https://house-plants2.p.rapidapi.com/all-lite?q=${query}`,
+      {
+        headers: {
+          "X-RapidAPI-Key":
+            "98764d8283msh44e3045e871b413p1ae8b4jsne57ce0a4493c",
+          "X-RapidAPI-Host": "house-plants2.p.rapidapi.com",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = response.data.slice().map((flower: any) => ({
+      name: flower["Common name"],
+      img: flower.Img,
+    }));
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};

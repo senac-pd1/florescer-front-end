@@ -6,35 +6,24 @@ import {
   FlowerName,
   FlowerRow,
   LikeFlower,
-} from "./FlowerListingStyle";
+} from "./PlantListStyle";
 import { FcLikePlaceholder } from "react-icons/fc";
-
-export interface Flower {
-  name: string;
-  img: string;
-}
+import { Flower } from "../../services/Api";
 
 interface PlantListProps {
   flowers: Flower[];
 }
 
 const PlantList: React.FC<PlantListProps> = ({ flowers }) => {
+  function onFlowerClick(flower: Flower): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <Container>
       <FlowerRow>
-        {flowers.slice(0, 4).map((flower) => (
-          <FlowerItem key={flower.name}>
-            <FlowerImg src={flower.img} alt={flower.name} />
-            <FlowerName>{flower.name}</FlowerName>
-            <LikeFlower>
-              <FcLikePlaceholder />
-            </LikeFlower>
-          </FlowerItem>
-        ))}
-      </FlowerRow>
-      <FlowerRow>
-        {flowers.slice(4, 8).map((flower) => (
-          <FlowerItem key={flower.name}>
+        {flowers.slice(0, 8).map((flower) => (
+          <FlowerItem key={flower.name} onClick={() => onFlowerClick(flower)}>
             <FlowerImg src={flower.img} alt={flower.name} />
             <FlowerName>{flower.name}</FlowerName>
             <LikeFlower>

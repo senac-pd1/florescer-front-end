@@ -1,76 +1,56 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { SectionListPlant } from "./FlowerListingStyle";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import PlantList from "../../components/FlowerListing/FlowerListing";
 import {
+  Flower,
+  getFlowerNamesAndImages,
+  searchFlowers,
+} from "../../services/Api";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import {
+  Container,
+  FlowerItemModal,
+  FlowerRow,
+  LikeFlowerModal,
+  SectionListPlant,
   FlowerItem,
   FlowerImg,
   FlowerName,
   LikeFlower,
+  ModalContainer,
+  ModalImg,
+  ModalTitle,
+  CloseModalButton,
+  TextModal,
 } from "./FlowerListingStyle";
 import { FcLikePlaceholder } from "react-icons/fc";
-
-interface Flower {
-  name: string;
-  img: string;
-}
+import { GrClose } from "react-icons/gr";
+import { DivSearchBar } from "../../components/SearchBar/SearchBarStyle";
 
 export const FlowerListing: React.FC = () => {
   const [flowers, setFlowers] = useState<Flower[]>([]);
+  const [selectedFlower, setSelectedFlower] = useState<Flower | null>(null);
+  const [searchedFlowers, setSearchedFlowers] = useState<Flower[]>([]);
 
   useEffect(() => {
-    const fetchFlowers = async () => {
-      const response = await axios.get(
-        "https://house-plants2.p.rapidapi.com/all-lite",
-        {
-          headers: {
-            "X-RapidAPI-Key":
-              "560e7b5defmsh91395a5338028e2p169d4fjsn5d8167d2a289",
-            "X-RapidAPI-Host": "house-plants2.p.rapidapi.com",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = response.data.slice(0, 8).map((flower: any) => ({
-        name: flower["Common name"],
-        img: flower.Img,
-      }));
+    const fetchFlowersData = async () => {
+      const data = await getFlowerNamesAndImages();
       setFlowers(data);
     };
-    fetchFlowers();
+    fetchFlowersData();
   }, []);
 
-  return (
-    <div>
-      <PlantList flowers={flowers} />
-    </div>
-  );
-};
+  const handleFlowerClick = (flower: Flower) => {
+    setSelectedFlower(flower);
+  };
 
-function FlowerList() {
-  const [flowers, setFlowers] = useState<Flower[]>([]);
+  const handleCloseModal = () => {
+    setSelectedFlower(null);
+  };
 
   const handleSearch = async (query: string) => {
     try {
-      const response = await axios.get(
-        `https://house-plants2.p.rapidapi.com/all-lite?q=${query}`,
-        {
-          headers: {
-            "X-RapidAPI-Key":
-              "560e7b5defmsh91395a5338028e2p169d4fjsn5d8167d2a289",
-            "X-RapidAPI-Host": "house-plants2.p.rapidapi.com",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = response.data.slice().map((flower: any) => ({
-        name: flower["Common name"],
-        img: flower.Img,
-      }));
-
-      setFlowers(data);
+      setFlowers([]);
+      const data = await searchFlowers(query);
+      setSearchedFlowers(data);
     } catch (error) {
       console.error(error);
     }
@@ -79,26 +59,64 @@ function FlowerList() {
   return (
     <>
       <SectionListPlant>
-        <SearchBar onSearch={handleSearch} />
-        <FlowerListing />
+        <DivSearchBar>
+          <SearchBar onSearch={handleSearch} />
+        </DivSearchBar>
+        <Container>
+          {searchedFlowers.length === 0
+            ? flowers.map((flower, index) => (
+                <FlowerRow key={index}>
+                  <FlowerItem onClick={() => handleFlowerClick(flower)}>
+                    <FlowerImg src={flower.img} alt={flower.name} />
+                    <FlowerName>{flower.name}</FlowerName>
+                    <LikeFlower>
+                      <FcLikePlaceholder />
+                    </LikeFlower>
+                  </FlowerItem>
+                </FlowerRow>
+              ))
+            : searchedFlowers.map((flower, index) => (
+                <FlowerRow key={index}>
+                  <FlowerItem onClick={() => handleFlowerClick(flower)}>
+                    <FlowerImg src={flower.img} alt={flower.name} />
+                    <FlowerName>{flower.name}</FlowerName>
+                    <LikeFlower>
+                      <FcLikePlaceholder />
+                    </LikeFlower>
+                  </FlowerItem>
+                </FlowerRow>
+              ))}
+        </Container>
       </SectionListPlant>
-      {flowers.map((flower) => (
-        <SectionListPlant>
-          <FlowerItem key={flower.name}>
-            <FlowerImg src={flower.img} alt={flower.name} />
-            <FlowerName>{flower.name}</FlowerName>
-            <LikeFlower>
+
+      {selectedFlower && (
+        <ModalContainer>
+          <CloseModalButton onClick={handleCloseModal}>
+            <GrClose />
+          </CloseModalButton>
+          <ModalTitle>{selectedFlower.name}</ModalTitle>
+          <TextModal>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste id
+            aliquid molestias ipsam
+          </TextModal>
+          <TextModal>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste id
+            aliquid molestias ipsam
+          </TextModal>
+          <TextModal>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste id
+            aliquid molestias ipsam
+          </TextModal>
+          <FlowerItemModal>
+            <ModalImg src={selectedFlower.img} alt={selectedFlower.name} />
+            <LikeFlowerModal>
               <FcLikePlaceholder />
-            </LikeFlower>
-          </FlowerItem>
-        </SectionListPlant>
-      ))}
-      ;
+            </LikeFlowerModal>
+          </FlowerItemModal>
+        </ModalContainer>
+      )}
     </>
   );
-}
+};
 
-export default FlowerList;
-function setFlowers(data: any) {
-  throw new Error("Function not implemented.");
-}
+export default FlowerListing;

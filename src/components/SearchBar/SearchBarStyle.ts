@@ -3,13 +3,12 @@ import { colorsVariables } from "./../../style/VariablesStyle";
 
 export const DivSearchBar = styled.div`
   display: flex;
-  margin: 60px;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  margin: 50px;
+  text-align: center;
 `;
-
 export const InputSearch = styled.input`
-  border: 1px solid #001801;
+  border: ${colorsVariables.borderColor};
   background-color: transparent;
   border-radius: 5px;
   padding: 3px;
@@ -21,4 +20,8 @@ export const ButtonSearch = styled.button`
   background: transparent;
   border: none;
   margin-left: -19px;
+`;
+
+export const MensasageError = styled.p`
+  margin: 20px;
 `;

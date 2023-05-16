@@ -1,33 +1,46 @@
 import styled from "styled-components";
+import { colorsVariables } from "../../style/VariablesStyle";
 
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-x: hidden;
 `;
 
 export const FlowerRow = styled.div`
   display: flex;
-  justify-content: space-around;
   margin-bottom: 20px;
-  width: 100%;
-  max-width: 800px;
+
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 350px) {
+    flex-wrap: wrap;
+    width: 80%;
+  }
+
+  @media (min-width: 1000px) {
+    width: 1000px;
+  }
 `;
 
 export const FlowerItem = styled.div`
-  background: rgba(0, 24, 1, 0.66);
+  background: ${colorsVariables.mediumDarkGreen};
+  box-shadow: ${colorsVariables.boxShadow};
+  display: inline-block;
   box-sizing: border-box;
-  width: 185px;
   height: 205px;
   margin: 20px;
-  left: 118px;
-  top: 1729px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  @media (max-width: 350px) {
+    width: 100%;
+  }
 `;
 
 export const FlowerImg = styled.img`
@@ -35,7 +48,7 @@ export const FlowerImg = styled.img`
   height: 150px;
   border-radius: 10px;
   margin-top: -15px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: ${colorsVariables.boxShadow};
 `;
 
 export const FlowerName = styled.span`
