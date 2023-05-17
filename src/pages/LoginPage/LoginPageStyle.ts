@@ -109,13 +109,15 @@ export const ImageContainer = styled.div`
   justify-content: center;
   width: 50%;
   height: 100%;
-  background-color: #007F3D;
+  background: rgb(186,217,194);
+  background: linear-gradient(90deg, rgba(186,217,194,1) 0%, rgba(0,24,1,1) 100%);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 `;
 
 export const LogoImage = styled.img`
-  /* Estilos da imagem do logo */
+width: 50%;
+height: 50%;
 `;
 
 export const WarningMessage = styled.p`

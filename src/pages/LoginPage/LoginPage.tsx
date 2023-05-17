@@ -15,7 +15,7 @@ import {
   LogoImage,
   WarningMessage
 } from './LoginPageStyle';
-import logoImage from '../../assets/logoHeader.svg';
+import logoImage from '../../assets/logoLogin.png';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
