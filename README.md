@@ -15,6 +15,9 @@ git checkout -b nomeDaBranchDoJira
 ```
 
 3. Faça sua tarefa e commits
+```bash
+git add .
+```
 
 ```bash
 git commit -m "descreva brevemente o que foi feito"
