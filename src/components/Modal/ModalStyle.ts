@@ -8,7 +8,7 @@ export const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${colorsVariables.lightGreen};
+  background-color: ${colorsVariables.white};
   border-radius: 8px;
   padding: 10%;
   box-shadow: ${colorsVariables.boxShadow};
