@@ -4,9 +4,11 @@ import { colorsVariables } from "./../../style/VariablesStyle";
 export const DivSearchBar = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 50px;
-  text-align: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
 `;
+
 export const InputSearch = styled.input`
   border: ${colorsVariables.borderColor};
   background-color: transparent;

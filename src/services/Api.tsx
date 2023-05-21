@@ -1,4 +1,4 @@
-import axios from "axios";
+/*import axios from "axios";
 
 export interface Flower {
   name: string;
@@ -49,6 +49,44 @@ export const searchFlowers = async (query: string): Promise<Flower[]> => {
     }));
 
     return data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+*/
+import axios from "axios";
+
+export interface Flower {
+  id: number;
+  nomeComum: string;
+  img: string;
+  nomeLatino: string;
+  luzTolerada: string;
+  luzIdeal: string;
+  temperaturaMax: string;
+  rega: string;
+  clima: string;
+}
+
+export const getFlowerNamesAndImages = async (): Promise<Flower[]> => {
+  try {
+    const response = await axios.get("http://localhost:3000/plants");
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const searchFlowers = async (query: string): Promise<Flower[]> => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/plants?q=${encodeURIComponent(query)}`
+    );
+    console.log(response.data); // Verificar formato dos dados
+    return response.data;
   } catch (error) {
     console.error(error);
     return [];

@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import {
   Container,
   FlowerItem,
@@ -23,9 +23,12 @@ const PlantList: React.FC<PlantListProps> = ({ flowers }) => {
     <Container>
       <FlowerRow>
         {flowers.slice(0, 8).map((flower) => (
-          <FlowerItem key={flower.name} onClick={() => onFlowerClick(flower)}>
-            <FlowerImg src={flower.img} alt={flower.name} />
-            <FlowerName>{flower.name}</FlowerName>
+          <FlowerItem
+            key={flower.nomeComum}
+            onClick={() => onFlowerClick(flower)}
+          >
+            <FlowerImg src={flower.img} alt={flower.nomeComum} />
+            <FlowerName>{flower.nomeComum}</FlowerName>
             <LikeFlower>
               <FcLikePlaceholder />
             </LikeFlower>
@@ -37,3 +40,37 @@ const PlantList: React.FC<PlantListProps> = ({ flowers }) => {
 };
 
 export default PlantList;
+*/
+
+import React, { useEffect, useState } from "react";
+import { Flower, getFlowerNamesAndImages } from "../../services/Api";
+
+const FlowerListing: React.FC = () => {
+  const [flowers, setFlowers] = useState<Flower[]>([]);
+
+  useEffect(() => {
+    const fetchFlowers = async () => {
+      const fetchedFlowers = await getFlowerNamesAndImages();
+      setFlowers(fetchedFlowers);
+    };
+
+    fetchFlowers();
+  }, []);
+
+  return (
+    <div>
+      {Array.isArray(flowers) && flowers.length > 0 ? (
+        flowers.map((flower) => (
+          <div key={flower.id}>
+            <h2>{flower.nomeComum}</h2>
+            <img src={flower.img} alt={flower.nomeComum} />
+          </div>
+        ))
+      ) : (
+        <p>Não foi possível carregar as plantinhas.</p>
+      )}
+    </div>
+  );
+};
+
+export default FlowerListing;

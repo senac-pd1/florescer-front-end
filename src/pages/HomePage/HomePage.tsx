@@ -2,7 +2,7 @@ import About from "../../containers/About/About";
 import Banner from "../../containers/Banner/Banner";
 import Billboard from "../../containers/Billboard/Billboard";
 import Header from "../../containers/Header/Header";
-import FlowerListing from "../../containers/FlowerListing/FlowerListing";
+import PlantListing from "../../containers/FlowerListing/PlantListing";
 import { ContainerHomePage } from "./HomePageStyle";
 
 const HomePage = () => {
@@ -12,7 +12,7 @@ const HomePage = () => {
       <Banner />
       <About />
       <Billboard />
-      <FlowerListing />
+      <PlantListing />
     </ContainerHomePage>
   );
 };
