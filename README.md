@@ -54,6 +54,10 @@ npm install
 ```bash
 npm start
 ```
+3. Abra um novo terminal e rode o json-server:
+```bash
+npm run json-serve
+```
 
 ## ⚠️ Boas práticas:
 
