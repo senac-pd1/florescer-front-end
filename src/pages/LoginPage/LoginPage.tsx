@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {
+  GlobalStyle,
   LoginPageContainer,
   MainContainer,
   FormContainer,
   Title,
+  TitleWrapper,
   Subtitle,
   InputWrapper,
   Label,
@@ -13,10 +15,15 @@ import {
   RegisterButton,
   ImageContainer,
   LogoImage,
-  WarningMessage
+  LogoTopContainer,
+  LogoTopImage,
+  WarningMessage,
+  TitleAndLogoContainer,
+  LogoImageContainer
 } from './LoginPageStyle';
+import { createGlobalStyle } from 'styled-components';
 import logoImage from '../../assets/logoLogin.png';
-
+import logoTopLogin from"../../assets/LogoTopLogin.svg";
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -69,25 +76,32 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+    <GlobalStyle />
     <LoginPageContainer>
       <MainContainer>
         <FormContainer>
+         <LogoImageContainer>
+          <LogoImage src={logoTopLogin} alt="Logo" />
+          </LogoImageContainer>
+        <TitleWrapper>
           <Title>Bem-Vindo</Title>
-          <Subtitle>Por favor, entre com seu e-mail e senha</Subtitle>
+         <Subtitle>Por favor, entre com seu e-mail e senha</Subtitle>
+          </TitleWrapper>
           <InputWrapper>
-            <Label htmlFor="email">E-mail:</Label>
-            <Input type="text" id="email" value={email} onChange={handleEmailChange} />
+            <Label htmlFor="email">E-mail</Label>
+            <Input type="text" id="email" placeholder='Digite seu e-mail' value={email} onChange={handleEmailChange} />
             {emailError && <WarningMessage>Preencha um e-mail válido</WarningMessage>}
           </InputWrapper>
           <InputWrapper>
-            <Label htmlFor="senha">Senha:</Label>
-            <Input type="password" id="senha" value={senha} onChange={handleSenhaChange} />
+            <Label htmlFor="senha">Senha</Label>
+            <Input type="password" id="senha" placeholder='Digite sua senha' value={senha} onChange={handleSenhaChange} />
             {capsLockError && <WarningMessage>Caps Lock está ativado</WarningMessage>}
           </InputWrapper>
-          <Button onClick={handleLogin}>Login</Button>
           <ForgotPasswordButton onClick={handleForgotPassword}>
             Esqueci minha senha
           </ForgotPasswordButton>
+          <Button onClick={handleLogin}>Entrar</Button>
           <RegisterButton onClick={handleRegister}>
             Ainda não está registrado? Crie sua conta aqui
           </RegisterButton>
@@ -98,6 +112,7 @@ const LoginPage = () => {
         </ImageContainer>
       </MainContainer>
     </LoginPageContainer>
+    </>
   );
 };
 
