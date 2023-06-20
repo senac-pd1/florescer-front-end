@@ -21,12 +21,14 @@ const NavBar = ({ open }: NavBarProps) => {
     <NavbarContainer open={open}>
       <nav>
         <LogoHeader>
-          <img src={logo} alt="ilustration of Florescer logo " />
+        <Link to="/">
+            <img  src={logo} alt="ilustration of Florescer logo " />
+        </Link>
         </LogoHeader>
 
         <ul>
           <motion.li whileTap={{ scale: 1.1 }}>
-            <a href="#home">Início</a>
+            <a href="#home" onClick={handleClick}>Início</a>
           </motion.li>
           <motion.li whileTap={{ scale: 1.1 }}>
             <a href="#about" onClick={handleClick}>

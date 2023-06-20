@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
+import Header from "../../containers/Header/Header";
+import { BackButton } from "./ProfilePageStyle";
 
 const ProfilePage = () => {
   return (
     <>
-      <h2>Profile page</h2>
-      <Link to="/">
-        <a>Voltar para Home</a>
-      </Link>
+      
+      <Header/>
+      <BackButton>
+        <Link to="/">
+          Voltar para Home
+        </Link>
+      </BackButton>
     </>
   );
 };
