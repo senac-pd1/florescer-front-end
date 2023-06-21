@@ -1,4 +1,8 @@
+import axios from "axios";
+
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   GlobalStyle,
   LoginPageContainer,
@@ -39,7 +43,7 @@ const LoginPage = () => {
     setSenha(e.target.value);
     setCapsLockError(false);
   };
-
+  const navigate = useNavigate();
   const handleLogin = () => {
     // Verificar se o email foi preenchido corretamente
     if (!validateEmail(email)) {
@@ -49,9 +53,20 @@ const LoginPage = () => {
 
 
 
-    // Lógica para fazer login com as credenciais fornecidas
-    console.log('Email:', email);
-    console.log('Senha:', senha);
+   // Enviar a requisição para o backend
+   axios
+   .post('http://localhost:5049/login', {
+     email: email,
+     password: senha
+   })
+   .then(response => {
+    navigate('/');
+     console.log('Usuário logado com sucesso!');
+   })
+   .catch(error => {
+     // Lidar com erros de autenticação, se necessário
+     console.log('Erro ao fazer login:', error);
+   });
   };
   const handleForgotPassword = () => {
     // Lógica para lidar com "Esqueci minha senha"
