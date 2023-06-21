@@ -1,3 +1,4 @@
+import { PlanstInterface } from "../../model/PlanstInterface";
 import imageGarden from "./../../assets/imageGarden.png";
 import {
   CircleShapeLeft,
@@ -10,6 +11,59 @@ import {
 } from "./UserGardenStyle";
 
 const UserGarden = () => {
+  const listPlants = [
+    {
+      id: "1",
+      name: "Samambaia",
+      img: "./../../assets/plant.png",
+      latinName: "Samambaia",
+      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
+      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
+      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
+      notification: true,
+    },
+    {
+      id: "2",
+      name: "Samambaia",
+      img: "./../../assets/plant.png",
+      latinName: "Samambaia",
+      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
+      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
+      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
+      notification: true,
+    },
+    {
+      id: "3",
+      name: "Samambaia",
+      img: "./../../assets/plant.png",
+      latinName: "Samambaia",
+      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
+      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
+      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
+      notification: true,
+    },
+    {
+      id: "4",
+      name: "Samambaia",
+      img: "./../../assets/plant.png",
+      latinName: "Samambaia",
+      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
+      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
+      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
+      notification: false,
+    },
+    {
+      id: "5",
+      name: "Samambaia",
+      img: "./../../assets/plant.png",
+      latinName: "Samambaia",
+      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
+      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
+      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
+      notification: false,
+    },
+  ];
+
   return (
     <GardenContainer>
       <TitleGarden>Meu Jardim</TitleGarden>
@@ -44,6 +98,11 @@ const UserGarden = () => {
           </p>
         </TextCard>
       </ContainerInfo>
+      {listPlants.map((plant: PlanstInterface, index: number) => (
+        <ul key={plant.id}>
+          <li>{plant.name}</li>
+        </ul>
+      ))}
     </GardenContainer>
   );
 };
