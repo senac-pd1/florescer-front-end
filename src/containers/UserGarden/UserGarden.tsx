@@ -1,11 +1,16 @@
 import { PlanstInterface } from "../../model/PlanstInterface";
 import imageGarden from "./../../assets/imageGarden.png";
+import imagePlant from "./../../assets/plant.png";
+import { IoCloseCircleSharp } from "react-icons/io5";
 import {
+  BtnInfosAndToggle,
+  BtnRemoveAndNamePlant,
   CircleShapeLeft,
   CircleShapeRight,
   ContainerInfo,
   GardenContainer,
   ImageCard,
+  PlantsGardenCard,
   TextCard,
   TitleGarden,
 } from "./UserGardenStyle";
@@ -15,7 +20,7 @@ const UserGarden = () => {
     {
       id: "1",
       name: "Samambaia",
-      img: "./../../assets/plant.png",
+      img: imagePlant,
       latinName: "Samambaia",
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
@@ -25,7 +30,7 @@ const UserGarden = () => {
     {
       id: "2",
       name: "Samambaia",
-      img: "./../../assets/plant.png",
+      img: imagePlant,
       latinName: "Samambaia",
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
@@ -35,7 +40,7 @@ const UserGarden = () => {
     {
       id: "3",
       name: "Samambaia",
-      img: "./../../assets/plant.png",
+      img: imagePlant,
       latinName: "Samambaia",
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
@@ -45,7 +50,7 @@ const UserGarden = () => {
     {
       id: "4",
       name: "Samambaia",
-      img: "./../../assets/plant.png",
+      img: imagePlant,
       latinName: "Samambaia",
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
@@ -55,7 +60,7 @@ const UserGarden = () => {
     {
       id: "5",
       name: "Samambaia",
-      img: "./../../assets/plant.png",
+      img: imagePlant,
       latinName: "Samambaia",
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
@@ -98,11 +103,25 @@ const UserGarden = () => {
           </p>
         </TextCard>
       </ContainerInfo>
-      {listPlants.map((plant: PlanstInterface, index: number) => (
-        <ul key={plant.id}>
-          <li>{plant.name}</li>
-        </ul>
-      ))}
+      <PlantsGardenCard>
+        {listPlants.map((plant: PlanstInterface, index: number) => (
+          <ul key={plant.id}>
+            <li>
+              <img src={plant.img} alt="imagem da planta" />
+            </li>
+            <BtnRemoveAndNamePlant>
+              <h3>{plant.name}</h3>
+              <button>
+                <IoCloseCircleSharp />
+              </button>
+            </BtnRemoveAndNamePlant>
+            <BtnInfosAndToggle>
+              <h3>toggle</h3>
+              <button>+ informações</button>
+            </BtnInfosAndToggle>
+          </ul>
+        ))}
+      </PlantsGardenCard>
     </GardenContainer>
   );
 };

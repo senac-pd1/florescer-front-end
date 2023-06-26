@@ -13,6 +13,7 @@ export const colorsVariables = {
   black: "#0D0D0D",
   boxShadow: "2px 2px 2px 2px rgba(0, 0, 0, 0.2)",
   borderColor: "1px solid #001801",
+  red: "#8C3030",
 };
 
 export const uiVariables = {
