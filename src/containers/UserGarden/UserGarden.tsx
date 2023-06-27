@@ -3,17 +3,16 @@ import imageGarden from "./../../assets/imageGarden.png";
 import imagePlant from "./../../assets/plant.png";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import {
-  BtnInfosAndToggle,
-  BtnRemoveAndNamePlant,
   CircleShapeLeft,
   CircleShapeRight,
   ContainerInfo,
   GardenContainer,
   ImageCard,
-  PlantsGardenCard,
+  PlantsContainer,
   TextCard,
   TitleGarden,
 } from "./UserGardenStyle";
+import PlantsCard from "../../components/PlantsCard/PlantsCard";
 
 const UserGarden = () => {
   const listPlants = [
@@ -103,25 +102,16 @@ const UserGarden = () => {
           </p>
         </TextCard>
       </ContainerInfo>
-      <PlantsGardenCard>
-        {listPlants.map((plant: PlanstInterface, index: number) => (
-          <ul key={plant.id}>
-            <li>
-              <img src={plant.img} alt="imagem da planta" />
-            </li>
-            <BtnRemoveAndNamePlant>
-              <h3>{plant.name}</h3>
-              <button>
-                <IoCloseCircleSharp />
-              </button>
-            </BtnRemoveAndNamePlant>
-            <BtnInfosAndToggle>
-              <h3>toggle</h3>
-              <button>+ informações</button>
-            </BtnInfosAndToggle>
-          </ul>
+      <PlantsContainer>
+        {listPlants.map((plants: PlanstInterface) => (
+          <PlantsCard
+            key={plants.id}
+            name={plants.name}
+            image={plants.img}
+            isWishlist={false}
+          />
         ))}
-      </PlantsGardenCard>
+      </PlantsContainer>
     </GardenContainer>
   );
 };

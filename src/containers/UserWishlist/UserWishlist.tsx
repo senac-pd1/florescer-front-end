@@ -5,10 +5,12 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import {
   ContainerInfoWishlist,
   ImageCardWishlist,
+  PlantsContainer,
   TextCardWishlist,
   TitleWishlist,
   WishlistContainer,
 } from "./UserWishlistStyle";
+import PlantsCard from "../../components/PlantsCard/PlantsCard";
 
 const UserWishlist = () => {
   const listPlants = [
@@ -95,6 +97,16 @@ const UserWishlist = () => {
           />
         </ImageCardWishlist>
       </ContainerInfoWishlist>
+      <PlantsContainer>
+        {listPlants.map((plants: PlanstInterface) => (
+          <PlantsCard
+            key={plants.id}
+            name={plants.name}
+            image={plants.img}
+            isWishlist={true}
+          />
+        ))}
+      </PlantsContainer>
       <TitleWishlist>Lojas próximas</TitleWishlist>
     </WishlistContainer>
   );

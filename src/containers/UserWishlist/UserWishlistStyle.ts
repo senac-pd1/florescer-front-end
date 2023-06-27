@@ -29,7 +29,6 @@ export const ContainerInfoWishlist = styled.div`
 
 export const TextCardWishlist = styled.div`
   color: ${colorsVariables.darkGreen};
-  z-index: 2;
   flex-basis: 40%;
   max-width: 800px;
   p {
@@ -41,10 +40,15 @@ export const TextCardWishlist = styled.div`
 `;
 
 export const ImageCardWishlist = styled.div`
-  z-index: 2;
   flex-basis: 55%;
   max-width: 600px;
   img {
     width: 100%;
   }
+`;
+export const PlantsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 50px 0;
 `;
