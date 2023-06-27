@@ -1,51 +1,8 @@
-/*import React from "react";
-import {
-  Container,
-  FlowerItem,
-  FlowerImg,
-  FlowerName,
-  FlowerRow,
-  LikeFlower,
-} from "./PlantListStyle";
-import { FcLikePlaceholder } from "react-icons/fc";
-import { Flower } from "../../services/Api";
+/*import React, { useEffect, useState } from "react";
+import { getFlowerNamesAndImages } from "../../services/Api";
+import { Flower } from "../../interfaces/interfaces";
 
-interface PlantListProps {
-  flowers: Flower[];
-}
-
-const PlantList: React.FC<PlantListProps> = ({ flowers }) => {
-  function onFlowerClick(flower: Flower): void {
-    throw new Error("Function not implemented.");
-  }
-
-  return (
-    <Container>
-      <FlowerRow>
-        {flowers.slice(0, 8).map((flower) => (
-          <FlowerItem
-            key={flower.nomeComum}
-            onClick={() => onFlowerClick(flower)}
-          >
-            <FlowerImg src={flower.img} alt={flower.nomeComum} />
-            <FlowerName>{flower.nomeComum}</FlowerName>
-            <LikeFlower>
-              <FcLikePlaceholder />
-            </LikeFlower>
-          </FlowerItem>
-        ))}
-      </FlowerRow>
-    </Container>
-  );
-};
-
-export default PlantList;
-*/
-
-import React, { useEffect, useState } from "react";
-import { Flower, getFlowerNamesAndImages } from "../../services/Api";
-
-const FlowerListing: React.FC = () => {
+const PlantListing: React.FC = () => {
   const [flowers, setFlowers] = useState<Flower[]>([]);
 
   useEffect(() => {
@@ -57,13 +14,15 @@ const FlowerListing: React.FC = () => {
     fetchFlowers();
   }, []);
 
+  const handleWishlistClick = (id: string) => {};
+
   return (
     <div>
       {Array.isArray(flowers) && flowers.length > 0 ? (
         flowers.map((flower) => (
-          <div key={flower.id}>
-            <h2>{flower.nomeComum}</h2>
-            <img src={flower.img} alt={flower.nomeComum} />
+          <div key={flower.Id}>
+            <h2>{flower.Name}</h2>
+            <img src={flower.Img} alt={flower.Name} />
           </div>
         ))
       ) : (
@@ -73,4 +32,54 @@ const FlowerListing: React.FC = () => {
   );
 };
 
-export default FlowerListing;
+export default PlantListing;
+*/
+import React, { useEffect, useState } from "react";
+import { getFlowerNamesAndImages } from "../../services/Api";
+import { Flower } from "../../interfaces/interfaces";
+
+const PlantListing: React.FC = () => {
+  const [flowers, setFlowers] = useState<Flower[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchFlowers = async () => {
+      try {
+        const fetchedFlowers = await getFlowerNamesAndImages();
+        setFlowers(fetchedFlowers);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFlowers();
+  }, []);
+
+  const handleWishlistClick = (id: string) => {
+    // Lógica para manipular o clique no botão de lista de desejos
+  };
+
+  return (
+    <div>
+      {isLoading ? (
+        <p>Carregando as plantinhas...</p>
+      ) : error ? (
+        <p>Erro ao carregar as plantinhas. Tente novamente mais tarde.</p>
+      ) : flowers.length > 0 ? (
+        flowers.map((flower) => (
+          <div key={flower.Id}>
+            <h2>{flower.Name}</h2>
+            <img src={flower.Img} alt={flower.Name} />
+          </div>
+        ))
+      ) : (
+        <p>Não há plantinhas disponíveis no momento.</p>
+      )}
+    </div>
+  );
+};
+
+export default PlantListing;

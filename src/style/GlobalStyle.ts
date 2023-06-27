@@ -13,6 +13,7 @@ body {
   color: ${colorsVariables.black};
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
+  
 }
 
 button {

@@ -41,6 +41,7 @@ export const FlowerImg = styled.img`
   border-radius: 10px;
   margin-top: -15px;
   box-shadow: ${colorsVariables.boxShadow};
+  cursor: pointer;
 `;
 
 export const FlowerName = styled.span`
@@ -48,11 +49,4 @@ export const FlowerName = styled.span`
   margin-top: 10px;
   text-align: center;
   max-width: 150px;
-`;
-
-export const LikeFlower = styled.button`
-  background-color: transparent;
-  border: none;
-  width: 50px;
-  margin: 10px;
 `;
