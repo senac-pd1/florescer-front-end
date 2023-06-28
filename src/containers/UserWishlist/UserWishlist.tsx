@@ -1,7 +1,7 @@
 import { PlanstInterface } from "../../model/PlanstInterface";
 import imagePlant from "./../../assets/plant.png";
 import imageWishlist from "./../../assets/imageWishlist.png";
-import { IoCloseCircleSharp } from "react-icons/io5";
+
 import {
   ContainerInfoWishlist,
   ImageCardWishlist,
@@ -11,7 +11,7 @@ import {
   WishlistContainer,
 } from "./UserWishlistStyle";
 import PlantsCard from "../../components/PlantsCard/PlantsCard";
-
+import Map from "../../components/Map/Map";
 const UserWishlist = () => {
   const listPlants = [
     {
@@ -103,6 +103,7 @@ const UserWishlist = () => {
         ))}
       </PlantsContainer>
       <TitleWishlist>Lojas próximas</TitleWishlist>
+      <Map />
     </WishlistContainer>
   );
 };
