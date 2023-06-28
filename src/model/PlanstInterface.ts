@@ -6,5 +6,5 @@ export interface PlanstInterface {
   toleratedLight: string;
   idealLight: string;
   watering: string;
-  notification: boolean;
+  notification?: boolean;
 }

@@ -36,6 +36,7 @@ export const BtnRemoveAndNamePlant = styled.li`
     margin: 0 15px;
     color: ${colorsVariables.red};
     border: none;
+    background-color: transparent;
 
     svg {
       width: 20px;
@@ -56,9 +57,14 @@ export const BtnInfosAndToggle = styled.li`
     font-size: 12px;
     font-weight: 800;
     border: none;
+    background-color: transparent;
   }
   h3 {
     margin: 0 15px;
     font-size: 10px;
   }
+`;
+
+export const ContainerToggle = styled.div`
+  margin-left: 15px;
 `;

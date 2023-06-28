@@ -22,7 +22,6 @@ const UserWishlist = () => {
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
       watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: true,
     },
     {
       id: "2",
@@ -32,7 +31,6 @@ const UserWishlist = () => {
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
       watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: true,
     },
     {
       id: "3",
@@ -42,7 +40,6 @@ const UserWishlist = () => {
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
       watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: true,
     },
     {
       id: "4",
@@ -52,7 +49,6 @@ const UserWishlist = () => {
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
       watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: false,
     },
     {
       id: "5",
@@ -62,7 +58,6 @@ const UserWishlist = () => {
       toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
       idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
       watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: false,
     },
   ];
 
