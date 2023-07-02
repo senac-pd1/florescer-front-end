@@ -1,127 +1,112 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useEffect, useState } from "react";
 
-// const Map = () => {
-//   const [location, setLocation] = useState<GeolocationCoordinates | null>(null);
-//   const [error, setError] = useState<string | null>(null);
+const containerStyle = {
+  width: "100%",
+  height: "800px",
+  borderRadius: "0px 0px 10px 10px",
+};
 
-//   useEffect(() => {
-//     const fetchLocation = async () => {
-//       try {
-//         const response = await axios.get("https://ipapi.co/json/");
-//         const { latitude, longitude } = response.data;
-//         setLocation({
-//           accuracy: 0,
-//           altitude: null,
-//           altitudeAccuracy: null,
-//           heading: null,
-//           latitude: parseFloat(latitude),
-//           longitude: parseFloat(longitude),
-//           speed: null,
-//         });
-//       } catch (error) {
-//         setError("Failed to fetch location.");
-//       }
-//     };
+const center = {
+  lat: -30.005793238843143,
+  lng: -51.15629610313375,
+};
+const mapOptions = {
+  styles: [
+    {
+      featureType: "administrative",
+      elementType: "geometry",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "poi",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "road",
+      elementType: "labels.icon",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "transit",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+  ],
+};
 
-//     fetchLocation();
-//   }, []);
-
-//   useEffect(() => {
-//     if (location) {
-//       // Aqui você pode fazer a chamada à API do Google Maps para buscar floriculturas próximas com base na latitude e longitude
-//       // Exemplo de código:
-//       // const fetchNearbyFlorists = async () => {
-//       //   try {
-//       //     const response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=5000&type=florist&key=YOUR_API_KEY`);
-//       //     // Processar a resposta da API do Google Maps
-//       //   } catch (error) {
-//       //     setError('Failed to fetch nearby florists.');
-//       //   }
-//       // };
-//       // fetchNearbyFlorists();
-//     }
-//   }, [location]);
-
-//   if (error) {
-//     return <div>Error: {error}</div>;
-//   }
-
-//   if (!location) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div>
-//       Latitude: {location.latitude}, Longitude: {location.longitude}
-//     </div>
-//   );
-// };
-
-// export default Map;
-
-const Map: React.FC = () => {
-  const [location, setLocation] = useState<GeolocationCoordinates | null>(null);
-  const [error, setError] = useState<string | null>(null);
+const Map = () => {
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
-    const fetchLocation = async () => {
-      try {
-        const response = await axios.get(
-          "https://geoip.maxmind.com/geoip/v2.1/city/me?demo=1",
-          {
-            headers: {
-              Authorization: "Bearer YOUR_API_KEY", //conseguir chave
-            },
-          }
-        );
-
-        const { latitude, longitude } = response.data.location;
-        setLocation({
-          accuracy: 0,
-          altitude: null,
-          altitudeAccuracy: null,
-          heading: null,
-          latitude: parseFloat(latitude),
-          longitude: parseFloat(longitude),
-          speed: null,
-        });
-      } catch (error) {
-        setError("Failed to fetch location.");
+    const checkGoogleMapsLoaded = setInterval(() => {
+      if (window.google && window.google.maps) {
+        setMapLoaded(true);
+        clearInterval(checkGoogleMapsLoaded);
       }
-    };
-
-    fetchLocation();
+    }, 100);
+    return () => clearInterval(checkGoogleMapsLoaded);
   }, []);
 
-  useEffect(() => {
-    if (location) {
-      // Aqui você pode fazer a chamada à API do Google Maps para buscar floriculturas próximas com base na latitude e longitude
-      // Exemplo de código:
-      // const fetchNearbyFlorists = async () => {
-      //   try {
-      //     const response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=5000&type=florist&key=YOUR_API_KEY`);
-      //     // Processar a resposta da API do Google Maps
-      //   } catch (error) {
-      //     setError('Failed to fetch nearby florists.');
-      //   }
-      // };
-      // fetchNearbyFlorists();
-    }
-  }, [location]);
+  const markers = [
+    { lat: -30.005793238843143, lng: -51.15629610313375 },
+    { lat: -30.008868479727226, lng: -51.156746714349126 },
+    // Adicione mais marcadores conforme necessário
+  ];
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!location) {
-    return <div>Loading...</div>;
-  }
+  const calculateBounds = () => {
+    const bounds = new window.google.maps.LatLngBounds();
+    markers.forEach((marker) => {
+      bounds.extend(marker);
+    });
+    return bounds;
+  };
 
   return (
-    <div>
-      Latitude: {location.latitude}, Longitude: {location.longitude}
-    </div>
+    <LoadScript googleMapsApiKey="AIzaSyCNQzehFbFXA2dW9GgXxiKNVo3RecpdP7Q">
+      {mapLoaded && (
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={12}
+          onLoad={(map) => {
+            const bounds = calculateBounds();
+            map.fitBounds(bounds);
+          }}
+          options={{
+            scrollwheel: true,
+            zoomControl: true,
+            minZoom: 4,
+            maxZoom: 20,
+            styles: mapOptions.styles,
+          }}
+        >
+          {markers.map((marker, index) => (
+            <Marker
+              key={index}
+              position={marker}
+              animation={window.google.maps.Animation.DROP}
+              icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+            />
+          ))}
+        </GoogleMap>
+      )}
+    </LoadScript>
   );
 };
 

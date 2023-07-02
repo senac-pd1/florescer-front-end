@@ -16,6 +16,8 @@ export const PlantsGardenCard = styled.div`
       img {
         margin: 15px 5px;
         border-radius: ${uiVariables.borderRadius};
+        width: 160px;
+        height: 135px;
       }
     }
   }

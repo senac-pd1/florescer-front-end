@@ -1,7 +1,5 @@
 import { PlanstInterface } from "../../model/PlanstInterface";
-import imagePlant from "./../../assets/plant.png";
 import imageWishlist from "./../../assets/imageWishlist.png";
-
 import {
   ContainerInfoWishlist,
   ImageCardWishlist,
@@ -12,55 +10,16 @@ import {
 } from "./UserWishlistStyle";
 import PlantsCard from "../../components/PlantsCard/PlantsCard";
 import Map from "../../components/Map/Map";
-const UserWishlist = () => {
-  const listPlants = [
-    {
-      id: "1",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-    },
-    {
-      id: "2",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-    },
-    {
-      id: "3",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-    },
-    {
-      id: "4",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-    },
-    {
-      id: "5",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-    },
-  ];
 
+interface WishListProps {
+  wishlistPlants: PlanstInterface[];
+  onDeletePlant: (plantId: string) => void;
+}
+
+export const UserWishlist: React.FC<WishListProps> = (props) => {
+  const handleDeletePlant = (plantId: string) => {
+    props.onDeletePlant(plantId);
+  };
   return (
     <WishlistContainer>
       <TitleWishlist>Minha Wishlist</TitleWishlist>
@@ -93,12 +52,14 @@ const UserWishlist = () => {
         </ImageCardWishlist>
       </ContainerInfoWishlist>
       <PlantsContainer>
-        {listPlants.map((plants: PlanstInterface) => (
+        {props.wishlistPlants.map((plants: PlanstInterface) => (
           <PlantsCard
             key={plants.id}
             name={plants.name}
             image={plants.img}
             isWishlist={true}
+            plantId={plants.id}
+            onDeletePlant={handleDeletePlant}
           />
         ))}
       </PlantsContainer>
@@ -107,5 +68,3 @@ const UserWishlist = () => {
     </WishlistContainer>
   );
 };
-
-export default UserWishlist;
