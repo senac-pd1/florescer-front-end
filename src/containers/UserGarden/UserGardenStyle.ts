@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { colorsVariables, uiVariables } from "../../style/VariablesStyle";
+import {
+  colorsVariables,
+  uiVariables,
+  devices,
+} from "../../style/VariablesStyle";
 
 export const GardenContainer = styled.section`
   background-color: ${colorsVariables.whiteBackground};
@@ -58,6 +62,10 @@ export const TextCard = styled.div`
   color: ${colorsVariables.darkGreen};
   flex-basis: 40%;
   max-width: 800px;
+  @media ${devices.laptopL} {
+    width: 100%;
+    margin: 0 15px;
+  }
   p {
     text-align: justify;
     font-size: 16px;
@@ -69,6 +77,10 @@ export const TextCard = styled.div`
 export const ImageCard = styled.div`
   flex-basis: 55%;
   max-width: 800px;
+  @media ${devices.laptopL} {
+    width: 100%;
+    margin: 0 15px;
+  }
   img {
     width: 100%;
   }

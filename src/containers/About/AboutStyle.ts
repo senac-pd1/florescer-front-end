@@ -13,7 +13,13 @@ export const SectionAbout = styled.section`
 export const ImageAbout = styled.figure`
   margin: 60px 20px;
   img {
-    max-width: 350px;
+    width: 350px;
+    @media ${devices.tablet} {
+      max-width: 300px;
+    }
+    @media ${devices.tabletM} {
+      max-width: 200px;
+    }
   }
 `;
 
@@ -26,5 +32,6 @@ export const TextAbout = styled.div`
     font-weight: lighter;
     line-height: 1.5;
     letter-spacing: 1px;
+    margin: 0 15px;
   }
 `;

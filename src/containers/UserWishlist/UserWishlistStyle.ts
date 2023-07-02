@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { colorsVariables, uiVariables } from "../../style/VariablesStyle";
+import {
+  colorsVariables,
+  uiVariables,
+  devices,
+} from "../../style/VariablesStyle";
 
 export const WishlistContainer = styled.section`
   background-color: ${colorsVariables.whiteBackground};
@@ -29,8 +33,16 @@ export const ContainerInfoWishlist = styled.div`
 
 export const TextCardWishlist = styled.div`
   color: ${colorsVariables.darkGreen};
-  flex-basis: 40%;
-  max-width: 800px;
+  max-width: 480px;
+  @media ${devices.laptopL} {
+    max-width: 400px;
+  }
+  @media ${devices.laptop} {
+    margin: 0 15px;
+  }
+  @media ${devices.laptop} {
+    width: 100%;
+  }
   p {
     text-align: justify;
     font-size: 16px;
@@ -40,8 +52,15 @@ export const TextCardWishlist = styled.div`
 `;
 
 export const ImageCardWishlist = styled.div`
-  flex-basis: 55%;
-  max-width: 600px;
+  max-width: 480px;
+  @media ${devices.laptopL} {
+    max-width: 400px;
+    margin: 0 15px;
+  }
+  @media ${devices.laptop} {
+    width: 100%;
+  }
+
   img {
     width: 100%;
   }

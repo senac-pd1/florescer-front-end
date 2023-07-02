@@ -15,8 +15,8 @@ interface PlantsCardProps {
   image: string;
   name: string;
   isWishlist: boolean;
-  plantId: string;
-  onDeletePlant: (plantId: string) => void;
+  plantId?: string;
+  onDeletePlant?: (plantId: string) => void;
 }
 
 const PlantsCard = ({
@@ -34,14 +34,16 @@ const PlantsCard = ({
   };
 
   const handleDeleteClick = () => {
-    onDeletePlant(plantId);
-    const userId = "63fe3802-07b8-42e4-bbdd-9f9ca514dd27";
-    deleteWishlistItem(userId, plantId);
+    if (plantId && onDeletePlant) {
+      onDeletePlant(plantId);
+      const userId = "d381ccba-990e-47a3-afcc-4219d8337a28";
+      deleteWishlistItem(userId, plantId);
+    }
   };
 
   const deleteWishlistItem = async (userId: string, plantsId: string) => {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODgzMzExMDQsImV4cCI6MTY4ODMzODMwNCwiaWF0IjoxNjg4MzMxMTA0LCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.IZYbQ6aCQwmAcjHC4LBy895Ehh4cC2C9SHA7MGvov9g";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODgzMzU4MjQsImV4cCI6MTY4ODM0MzAyNCwiaWF0IjoxNjg4MzM1ODI0LCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.XR_ItkT4w8zh7xSyFlRlvOPWcjoOPcBkpdHPdativdU";
     try {
       const deleteService = deleteItemWishlist(userId, token, plantsId);
       await deleteService.delete("", {

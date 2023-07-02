@@ -23,7 +23,14 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
   return (
     <WishlistContainer>
       <TitleWishlist>Minha Wishlist</TitleWishlist>
+
       <ContainerInfoWishlist>
+        <ImageCardWishlist>
+          <img
+            src={imageWishlist}
+            alt="imagem de uma mulher colocando uma nova planta em sua estante"
+          />
+        </ImageCardWishlist>
         <TextCardWishlist>
           <p>
             Aqui você pode criar uma lista personalizada de desejos das plantas
@@ -44,12 +51,6 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
             lugares certos para adquiri-las.
           </p>
         </TextCardWishlist>
-        <ImageCardWishlist>
-          <img
-            src={imageWishlist}
-            alt="imagem de uma mulher colocando uma nova planta em sua estante"
-          />
-        </ImageCardWishlist>
       </ContainerInfoWishlist>
       <PlantsContainer>
         {props.wishlistPlants.map((plants: PlanstInterface) => (
