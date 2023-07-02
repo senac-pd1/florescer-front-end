@@ -60,8 +60,7 @@ export const ContainerInfo = styled.div`
 
 export const TextCard = styled.div`
   color: ${colorsVariables.darkGreen};
-  flex-basis: 40%;
-  max-width: 800px;
+  max-width: 500px;
   @media ${devices.laptopL} {
     width: 100%;
     margin: 0 15px;
@@ -75,8 +74,7 @@ export const TextCard = styled.div`
 `;
 
 export const ImageCard = styled.div`
-  flex-basis: 55%;
-  max-width: 800px;
+  max-width: 600px;
   @media ${devices.laptopL} {
     width: 100%;
     margin: 0 15px;

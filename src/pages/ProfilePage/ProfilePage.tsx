@@ -5,6 +5,7 @@ import { UserWishlist } from "../../containers/UserWishlist/UserWishlist";
 import { getWishlist, deleteItemWishlist } from "../../services/ApiProfile";
 import { useEffect, useState } from "react";
 import { PlanstInterface } from "../../model/PlanstInterface";
+import { ContainerProfilePage } from "./ProfilePageStyle";
 
 const ProfilePage = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -38,14 +39,14 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <>
+    <ContainerProfilePage>
       <Header />
       <UserGarden />
       <UserWishlist
         wishlistPlants={wishlist}
         onDeletePlant={handleDeletePlant}
       />
-    </>
+    </ContainerProfilePage>
   );
 };
 
