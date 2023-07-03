@@ -24,16 +24,17 @@ import {
   WarningMessage,
   TitleAndLogoContainer,
   LogoImageContainer
-} from './LoginPageStyle';
+} from './RegisterPageStyle';
 import { createGlobalStyle } from 'styled-components';
 import logoImage from '../../assets/logoLogin.png';
 import logoTopLogin from"../../assets/LogoTopLogin.svg";
-const LoginPage = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [capsLockError, setCapsLockError] = useState(false);
-
+  const [senhasDiferentesError, setSenhasDiferentesError] = useState(false);
+  const [confirmarSenha, setConfirmarSenha] = useState('');
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     setEmailError(false);
@@ -42,45 +43,57 @@ const LoginPage = () => {
   const handleSenhaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSenha(e.target.value);
     setCapsLockError(false);
+    if (confirmarSenha !== '' && e.target.value !== confirmarSenha) {
+      setSenhasDiferentesError(true);
+    }
   };
   const navigate = useNavigate();
   const handleLogin = () => {
+    if (senhasDiferentesError) {
+      setSenhasDiferentesError(true);
+      return;
+    }
     // Verificar se o email foi preenchido corretamente
     if (!validateEmail(email)) {
       setEmailError(true);
       return;
     }
+    if (senha !== confirmarSenha) {
+      setCapsLockError(true);
+      return;
+    }
+  
 
 
 
    // Enviar a requisição para o backend
    axios
-   .post('http://localhost:5049/login', {
+   .post('http://localhost:5049/registro', {
      email: email,
      password: senha
    })
    .then(response => {
-    navigate('/');
-     console.log('Usuário logado com sucesso!');
-     localStorage.setItem('token', response.data.token);
-     localStorage.setItem('id', response.data.id);
-     const token = localStorage.getItem('token');
-      const id = localStorage.getItem('id');
-      console.log("Token: ", token);
-      console.log("ID: ", id);
+    navigate('/login');
+     console.log('Usuário registrado com sucesso!');
+
    })
    .catch(error => {
      // Lidar com erros de autenticação, se necessário
-     console.log('Erro ao fazer login:', error);
+     console.log('Erro ao fazer registro:', error);
    });
   };
-  const handleForgotPassword = () => {
-    // Lógica para lidar com "Esqueci minha senha"
-    console.log('Esqueci minha senha');
-  };
+
+  const handleConfirmarSenhaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmarSenha(e.target.value);
+    setSenhasDiferentesError(false);
   
-  const handleRegister = () => {
-    navigate('/register')
+    // Verificar se as senhas são diferentes
+    if (senha !== '' && e.target.value !== senha) {
+      setSenhasDiferentesError(true);
+    }
+  };
+  const handleAlreadyRegister = () => {
+    navigate('/login')
   };
   
   const validateEmail = (email: string) => {
@@ -105,8 +118,7 @@ const LoginPage = () => {
           <LogoImage src={logoTopLogin} alt="Logo" />
           </LogoImageContainer>
         <TitleWrapper>
-          <Title>Bem-Vindo</Title>
-         <Subtitle>Por favor, entre com seu e-mail e senha</Subtitle>
+          <Title>Crie uma conta</Title>
           </TitleWrapper>
           <InputWrapper>
             <Label htmlFor="email">E-mail</Label>
@@ -116,14 +128,16 @@ const LoginPage = () => {
           <InputWrapper>
             <Label htmlFor="senha">Senha</Label>
             <Input type="password" id="senha" placeholder='Digite sua senha' value={senha} onChange={handleSenhaChange} />
-            {capsLockError && <WarningMessage>Caps Lock está ativado</WarningMessage>}
+            {senhasDiferentesError && <WarningMessage>As senhas não coincidem</WarningMessage>}
+
           </InputWrapper>
-          <ForgotPasswordButton onClick={handleForgotPassword}>
-            Esqueci minha senha
-          </ForgotPasswordButton>
-          <Button onClick={handleLogin}>Entrar</Button>
-          <RegisterButton onClick={handleRegister}>
-            Ainda não está registrado? Crie sua conta aqui
+          <InputWrapper>
+  <Label htmlFor="confirmarSenha">Confirmar Senha</Label>
+  <Input type="password" id="confirmarSenha" placeholder='Confirme sua senha' value={confirmarSenha} onChange={handleConfirmarSenhaChange} />
+</InputWrapper>
+          <Button onClick={handleLogin}>Registrar</Button>
+          <RegisterButton onClick={handleAlreadyRegister}>
+            Já está registrado? Faça login aqui
           </RegisterButton>
         </FormContainer>
         <ImageContainer>
@@ -136,4 +150,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
