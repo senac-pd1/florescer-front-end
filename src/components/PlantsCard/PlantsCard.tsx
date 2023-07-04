@@ -22,7 +22,7 @@ interface PlantsCardProps {
   onDeletePlant: (plantId: string) => void;
 }
 
-const PlantsCard = ({
+export const PlantsCard = ({
   image,
   name,
   isWishlist,
@@ -133,5 +133,3 @@ const PlantsCard = ({
     </PlantsGardenCard>
   );
 };
-
-export default PlantsCard;

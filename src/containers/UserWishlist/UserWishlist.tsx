@@ -8,8 +8,9 @@ import {
   TitleWishlist,
   WishlistContainer,
 } from "./UserWishlistStyle";
-import PlantsCard from "../../components/PlantsCard/PlantsCard";
+import { PlantsCard } from "../../components/PlantsCard/PlantsCard";
 import Map from "../../components/Map/Map";
+import { NotFoundCard } from "../../components/NotFoundCard/NotFoundCard";
 
 interface WishListProps {
   wishlistPlants: PlanstInterface[];
@@ -53,16 +54,22 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
         </TextCardWishlist>
       </ContainerInfoWishlist>
       <PlantsContainer>
-        {props.wishlistPlants.map((plants: PlanstInterface) => (
-          <PlantsCard
-            key={plants.id}
-            name={plants.name}
-            image={plants.img}
-            isWishlist={true}
-            plantId={plants.id}
-            onDeletePlant={handleDeletePlant}
-          />
-        ))}
+        {props.wishlistPlants.length > 0 ? (
+          <>
+            {props.wishlistPlants.map((plants: PlanstInterface) => (
+              <PlantsCard
+                key={plants.id}
+                name={plants.name}
+                image={plants.img}
+                isWishlist={true}
+                plantId={plants.id}
+                onDeletePlant={handleDeletePlant}
+              />
+            ))}
+          </>
+        ) : (
+          <NotFoundCard message={"Nenhuma plantinha em sua wishilist"} />
+        )}
       </PlantsContainer>
       <TitleWishlist>Lojas próximas</TitleWishlist>
       <Map />

@@ -1,7 +1,5 @@
 import { PlanstInterface } from "../../model/PlanstInterface";
 import imageGarden from "./../../assets/imageGarden.png";
-import imagePlant from "./../../assets/plant.png";
-import { IoCloseCircleSharp } from "react-icons/io5";
 import {
   CircleShapeLeft,
   CircleShapeRight,
@@ -12,7 +10,8 @@ import {
   TextCard,
   TitleGarden,
 } from "./UserGardenStyle";
-import PlantsCard from "../../components/PlantsCard/PlantsCard";
+import { PlantsCard } from "../../components/PlantsCard/PlantsCard";
+import { NotFoundCard } from "../../components/NotFoundCard/NotFoundCard";
 
 interface GardenProps {
   gardenPlants: PlanstInterface[];
@@ -23,6 +22,7 @@ const UserGarden: React.FC<GardenProps> = (props) => {
   const handleDeletePlant = (plantId: string) => {
     props.onDeletePlant(plantId);
   };
+
   return (
     <GardenContainer>
       <TitleGarden>Meu Jardim</TitleGarden>
@@ -58,16 +58,22 @@ const UserGarden: React.FC<GardenProps> = (props) => {
         </TextCard>
       </ContainerInfo>
       <PlantsContainer>
-        {props.gardenPlants.map((plants: PlanstInterface) => (
-          <PlantsCard
-            key={plants.id}
-            name={plants.name}
-            image={plants.img}
-            isWishlist={false}
-            plantId={plants.id}
-            onDeletePlant={handleDeletePlant}
-          />
-        ))}
+        {props.gardenPlants.length > 0 ? (
+          <>
+            {props.gardenPlants.map((plants: PlanstInterface) => (
+              <PlantsCard
+                key={plants.id}
+                name={plants.name}
+                image={plants.img}
+                isWishlist={false}
+                plantId={plants.id}
+                onDeletePlant={handleDeletePlant}
+              />
+            ))}
+          </>
+        ) : (
+          <NotFoundCard message={"Nenhuma plantinha em seu jardim"} />
+        )}
       </PlantsContainer>
     </GardenContainer>
   );
