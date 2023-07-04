@@ -39,49 +39,59 @@ export const PlantsCard = ({
   const handleDeleteClick = () => {
     if (plantId && onDeletePlant) {
       onDeletePlant(plantId);
-      const userId = "d381ccba-990e-47a3-afcc-4219d8337a28";
+      const userId = localStorage.getItem("id");
       isWishlist;
-      deleteWishlistItem(userId, plantId);
+      if (userId) {
+        deleteWishlistItem(userId, plantId);
+      }
     }
   };
 
   const handleDeleteClickGarden = () => {
     if (plantId && onDeletePlant) {
       onDeletePlant(plantId);
-      const userId = "d381ccba-990e-47a3-afcc-4219d8337a28";
+      const userId = localStorage.getItem("id");
       isWishlist = false;
-      deleteGardenItem(userId, plantId);
+      if (userId) {
+        deleteGardenItem(userId, plantId);
+      }
     }
   };
 
   const deleteWishlistItem = async (userId: string, plantsId: string) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg0MjY3MTAsImV4cCI6MTY4ODQzMzkxMCwiaWF0IjoxNjg4NDI2NzEwLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.xMWkzcSsyA1J21FZazpt0Do3yTvbcRDU9MP8-yng0OI";
+    const token = localStorage.getItem("token");
     try {
-      const deleteService = deleteItemWishlist(userId, token, plantsId);
-      await deleteService.delete("", {
-        data: {
-          userId: userId,
-          plantaId: plantsId,
-        },
-      });
+      if (token) {
+        const deleteService = deleteItemWishlist(userId, token, plantsId);
+        await deleteService.delete("", {
+          data: {
+            userId: userId,
+            plantaId: plantsId,
+          },
+        });
+      }
     } catch (error) {
       console.log(`Error ${error}`);
     }
   };
 
   const deleteGardenItem = async (userId: string, plantsId: string) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg0MjY3MTAsImV4cCI6MTY4ODQzMzkxMCwiaWF0IjoxNjg4NDI2NzEwLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.xMWkzcSsyA1J21FZazpt0Do3yTvbcRDU9MP8-yng0OI";
+    const token = localStorage.getItem("token");
     try {
-      const deleteServiceGarden = deletePlantMyGarden(userId, token, plantsId);
-      await deleteServiceGarden.delete("", {
-        data: {
-          userId: userId,
-          plantaId: plantsId,
-          notifica: false,
-        },
-      });
+      if (token) {
+        const deleteServiceGarden = deletePlantMyGarden(
+          userId,
+          token,
+          plantsId
+        );
+        await deleteServiceGarden.delete("", {
+          data: {
+            userId: userId,
+            plantaId: plantsId,
+            notifica: false,
+          },
+        });
+      }
     } catch (error) {
       console.log(`Error ${error}`);
     }
