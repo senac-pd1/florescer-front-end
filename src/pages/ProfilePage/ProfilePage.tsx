@@ -15,31 +15,33 @@ const ProfilePage = () => {
   const [wishlist, setWishlist] = useState([]);
   const [garden, setGarden] = useState([]);
 
-  const getWishlistRequest = async (userId: string) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg0MjY3MTAsImV4cCI6MTY4ODQzMzkxMCwiaWF0IjoxNjg4NDI2NzEwLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.xMWkzcSsyA1J21FZazpt0Do3yTvbcRDU9MP8-yng0OI";
+  const getWishlistRequest = async (userId: string | any) => {
+    const token = localStorage.getItem("token");
 
     try {
-      const wishlistService = getWishlist(userId, token);
-      const response = await wishlistService.get("");
+      if (token) {
+        const wishlistService = getWishlist(userId, token);
+        const response = await wishlistService.get("");
 
-      if (response.data) {
-        setWishlist(response.data);
+        if (response.data) {
+          setWishlist(response.data);
+        }
       }
     } catch (error) {
       console.log(`Error ${error}`);
     }
   };
 
-  const getGardenRequest = async (userId: string) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg0MjY3MTAsImV4cCI6MTY4ODQzMzkxMCwiaWF0IjoxNjg4NDI2NzEwLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.xMWkzcSsyA1J21FZazpt0Do3yTvbcRDU9MP8-yng0OI";
+  const getGardenRequest = async (userId: string | any) => {
+    const token = localStorage.getItem("token");
 
     try {
-      const gardenService = getMyGarden(userId, token);
-      const response = await gardenService.get("");
-      if (response.data) {
-        setGarden(response.data);
+      if (token) {
+        const gardenService = getMyGarden(userId, token);
+        const response = await gardenService.get("");
+        if (response.data) {
+          setGarden(response.data);
+        }
       }
     } catch (error) {
       console.log(`Error ${error}`);
@@ -61,8 +63,8 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    getWishlistRequest("d381ccba-990e-47a3-afcc-4219d8337a28");
-    getGardenRequest("d381ccba-990e-47a3-afcc-4219d8337a28");
+    getWishlistRequest(localStorage.getItem("id"));
+    getGardenRequest(localStorage.getItem("id"));
   }, []);
 
   return (
