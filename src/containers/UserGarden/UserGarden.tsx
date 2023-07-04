@@ -14,60 +14,15 @@ import {
 } from "./UserGardenStyle";
 import PlantsCard from "../../components/PlantsCard/PlantsCard";
 
-const UserGarden = () => {
-  const listPlants = [
-    {
-      id: "1",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: true,
-    },
-    {
-      id: "2",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: true,
-    },
-    {
-      id: "3",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: true,
-    },
-    {
-      id: "4",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: false,
-    },
-    {
-      id: "5",
-      name: "Samambaia",
-      img: imagePlant,
-      latinName: "Samambaia",
-      toleratedLight: "Luz difusa (menos de 5.300 lux / 500 fc)",
-      idealLight: "Luz forte (21.500 a 3.200 lux/2.000 a 300 fc)",
-      watering: "Mantenha úmido entre as regas e pode secar entre as regas",
-      notification: false,
-    },
-  ];
+interface GardenProps {
+  gardenPlants: PlanstInterface[];
+  onDeletePlant: (plantId: string) => void;
+}
 
+const UserGarden: React.FC<GardenProps> = (props) => {
+  const handleDeletePlant = (plantId: string) => {
+    props.onDeletePlant(plantId);
+  };
   return (
     <GardenContainer>
       <TitleGarden>Meu Jardim</TitleGarden>
@@ -103,12 +58,14 @@ const UserGarden = () => {
         </TextCard>
       </ContainerInfo>
       <PlantsContainer>
-        {listPlants.map((plants: PlanstInterface) => (
+        {props.gardenPlants.map((plants: PlanstInterface) => (
           <PlantsCard
             key={plants.id}
             name={plants.name}
             image={plants.img}
             isWishlist={false}
+            plantId={plants.id}
+            onDeletePlant={handleDeletePlant}
           />
         ))}
       </PlantsContainer>

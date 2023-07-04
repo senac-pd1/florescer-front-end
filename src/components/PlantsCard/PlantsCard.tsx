@@ -8,15 +8,18 @@ import {
 import ReactSwitch from "react-switch";
 import { useState } from "react";
 import { colorsVariables } from "../../style/VariablesStyle";
-import { deleteItemWishlist } from "../../services/ApiProfile";
+import {
+  deleteItemWishlist,
+  deletePlantMyGarden,
+} from "../../services/ApiProfile";
 import { Tooltip } from "@mui/material";
 
 interface PlantsCardProps {
   image: string;
   name: string;
   isWishlist: boolean;
-  plantId?: string;
-  onDeletePlant?: (plantId: string) => void;
+  plantId: string;
+  onDeletePlant: (plantId: string) => void;
 }
 
 const PlantsCard = ({
@@ -37,19 +40,46 @@ const PlantsCard = ({
     if (plantId && onDeletePlant) {
       onDeletePlant(plantId);
       const userId = "d381ccba-990e-47a3-afcc-4219d8337a28";
+      isWishlist;
       deleteWishlistItem(userId, plantId);
+    }
+  };
+
+  const handleDeleteClickGarden = () => {
+    if (plantId && onDeletePlant) {
+      onDeletePlant(plantId);
+      const userId = "d381ccba-990e-47a3-afcc-4219d8337a28";
+      isWishlist = false;
+      deleteGardenItem(userId, plantId);
     }
   };
 
   const deleteWishlistItem = async (userId: string, plantsId: string) => {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODgzMzU4MjQsImV4cCI6MTY4ODM0MzAyNCwiaWF0IjoxNjg4MzM1ODI0LCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.XR_ItkT4w8zh7xSyFlRlvOPWcjoOPcBkpdHPdativdU";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg0MjY3MTAsImV4cCI6MTY4ODQzMzkxMCwiaWF0IjoxNjg4NDI2NzEwLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.xMWkzcSsyA1J21FZazpt0Do3yTvbcRDU9MP8-yng0OI";
     try {
       const deleteService = deleteItemWishlist(userId, token, plantsId);
       await deleteService.delete("", {
         data: {
           userId: userId,
           plantaId: plantsId,
+        },
+      });
+    } catch (error) {
+      console.log(`Error ${error}`);
+    }
+  };
+
+  const deleteGardenItem = async (userId: string, plantsId: string) => {
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg0MjY3MTAsImV4cCI6MTY4ODQzMzkxMCwiaWF0IjoxNjg4NDI2NzEwLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.xMWkzcSsyA1J21FZazpt0Do3yTvbcRDU9MP8-yng0OI";
+    try {
+      const deleteServiceGarden = deletePlantMyGarden(userId, token, plantsId);
+      await deleteServiceGarden.delete("", {
+        data: {
+          userId: userId,
+          plantaId: plantsId,
+          notifica: false,
         },
       });
     } catch (error) {
@@ -65,12 +95,21 @@ const PlantsCard = ({
         </li>
         <BtnRemoveAndNamePlant>
           <h3>{name}</h3>
-          <Tooltip title="Remover item">
-            <button onClick={handleDeleteClick}>
-              <IoCloseCircleSharp />
-            </button>
-          </Tooltip>
+          {isWishlist ? (
+            <Tooltip title="Remover item">
+              <button onClick={handleDeleteClick}>
+                <IoCloseCircleSharp />
+              </button>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Remover item">
+              <button onClick={handleDeleteClickGarden}>
+                <IoCloseCircleSharp />
+              </button>
+            </Tooltip>
+          )}
         </BtnRemoveAndNamePlant>
+
         <BtnInfosAndToggle>
           {isWishlist ? (
             true
