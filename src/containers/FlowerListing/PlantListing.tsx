@@ -72,7 +72,7 @@ const PlantListing: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container id="newsplants">
       <SearchBar onSearch={handleSearch} />
       {errorMessage ? (
         <div>{errorMessage}</div>
