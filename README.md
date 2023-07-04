@@ -15,6 +15,9 @@ git checkout -b nomeDaBranchDoJira
 ```
 
 3. Faça sua tarefa e commits
+```bash
+git add .
+```
 
 ```bash
 git commit -m "descreva brevemente o que foi feito"
@@ -50,6 +53,10 @@ npm install
 
 ```bash
 npm start
+```
+3. Abra um novo terminal e rode o json-server:
+```bash
+npm run json-serve
 ```
 
 ## ⚠️ Boas práticas:
