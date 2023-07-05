@@ -26,7 +26,8 @@ import {
   LogoImageContainer
 } from './RegisterPageStyle';
 import { createGlobalStyle } from 'styled-components';
-import logoImage from '../../assets/logoLogin.png';
+import logoImage from '../../assets/logoLogin.svg';
+
 import logoTopLogin from"../../assets/LogoTopLogin.svg";
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -70,7 +71,9 @@ const RegisterPage = () => {
    axios
    .post('http://localhost:5049/registro', {
      email: email,
-     password: senha
+     password: senha,
+     confirmPassword: senha
+
    })
    .then(response => {
     navigate('/login');
