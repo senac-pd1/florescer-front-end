@@ -26,7 +26,7 @@ import {
   LogoImageContainer
 } from './LoginPageStyle';
 import { createGlobalStyle } from 'styled-components';
-import logoImage from '../../assets/logoLogin.png';
+import logoImage from '../../assets/logoLogin.svg';
 import logoTopLogin from"../../assets/LogoTopLogin.svg";
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -127,7 +127,6 @@ const LoginPage = () => {
           </RegisterButton>
         </FormContainer>
         <ImageContainer>
-          {/* Colocar a tag da imagem do logo da marca aqui */}
           <LogoImage src={logoImage} alt="Logo da marca" />
         </ImageContainer>
       </MainContainer>

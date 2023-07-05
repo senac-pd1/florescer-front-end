@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
+import { colorsVariables, devices,uiVariables } from "./../../style/VariablesStyle";
 
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
@@ -15,7 +16,7 @@ export const LoginPageContainer = styled.div`
   justify-content: center; 
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: ${colorsVariables.lightGrey};
 `;
 
 export const MainContainer = styled.div`
@@ -24,9 +25,15 @@ export const MainContainer = styled.div`
   align-items: center;
   width:1000px;
   height: 500px;
-  background-color: #F2F2F2;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  background-color: ${colorsVariables.white};
+  box-shadow: ${colorsVariables.boxShadow};
+  border-radius: ${uiVariables.borderRadius};
+  
+  @media (max-width: 576px) {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -37,6 +44,9 @@ export const FormContainer = styled.div`
   width: 50%;
   padding: 20px;
   position:relative;
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 export const TitleAndLogoContainer = styled.div`
   display: flex;
@@ -50,10 +60,16 @@ export const LogoImageContainer= styled.image`
   margin-left:20px;
   margin-top:-50px;
   width:200px;
+  @media (max-width: 576px) {
+    position: static;
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 150px;
+  }
 `
 export const Title = styled.h2`
   font-size: 24px;
-  color: #333333;
+  color: ${colorsVariables.black};
   margin-bottom: 10px;
   text-align: left;
 `;
@@ -64,7 +80,7 @@ export const TitleWrapper = styled.div`
 
 export const Subtitle = styled.p`
   font-size: 14px;
-  color: #666666;
+  color: ${colorsVariables.mediumGrey};
   margin-bottom: 20px;
 `;
 
@@ -77,22 +93,22 @@ export const InputWrapper = styled.div`
 
 export const Label = styled.label`
   font-size: 14px;
-  color: #333333;
+  color: ${colorsVariables.black};
   margin-bottom: 5px;
     padding-top:10px;
   font-weight:bold;
 `;
 
 export const Input = styled.input`
-  background-color:#F2F2F2;
+background-color: ${colorsVariables.white};
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #1e1e1e;
+  border: 1px solid ${colorsVariables.black};
   outline: none;
   transition: border-color 0.3s ease;
 
   &:focus {
-    border-color: #33cc33;
+    border-color: ${colorsVariables.green};
   }
 `;
 
@@ -101,8 +117,8 @@ export const Button = styled.button`
   width:65%;
   padding: 10px 20px;
   border-radius: 5px;
-  background-color: #1B5924;
-  color: #ffffff;
+  background-color: ${colorsVariables.green};
+  color: ${colorsVariables.white};
   font-weight: bold;
   border: none;
   cursor: pointer;
@@ -110,14 +126,14 @@ export const Button = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #29a329;
+    background-color: ${colorsVariables.mediumGreen};
   }
 `;
 
 export const ForgotPasswordButton = styled.button`
   text-align: right;
   background-color: transparent;
-  color: #1B5924;
+  color: ${colorsVariables.green};
   border: none;
   cursor: pointer;
   margin-bottom: 5px;
@@ -130,7 +146,7 @@ export const ForgotPasswordButton = styled.button`
 
 export const RegisterButton = styled.button`
   background-color: transparent;
-  color: #333333;
+  color: ${colorsVariables.black};
   border: none;
   cursor: pointer;
 
@@ -146,14 +162,21 @@ export const ImageContainer = styled.div`
   width: 50%;
   height: 100%;
   background: rgb(186,217,194);
-  background: linear-gradient(120deg, rgba(186,217,194,1) 0%, rgba(0,24,1,1) 100%);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  background: linear-gradient(120deg, ${colorsVariables.lightGreen} 0%, ${colorsVariables.darkGreen} 100%);
+  border-top-right-radius: ${uiVariables.borderRadius};
+  border-bottom-right-radius: ${uiVariables.borderRadius};
+  @media (max-width: 576px) {
+    display:none;
+  }
 `;
 
 export const LogoImage = styled.img`
 width: 50%;
 height: 50%;
+@media (max-width: 576px) {
+  width: 80%;
+  height: 80%;
+}
 `;
 export const LogoTopContainer = styled.div`
   position: absolute;
