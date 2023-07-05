@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { colorsVariables, devices,uiVariables } from "./../../style/VariablesStyle";
 
+
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
@@ -17,6 +18,7 @@ export const LoginPageContainer = styled.div`
   align-items: center;
   height: 100vh;
   background-color: ${colorsVariables.lightGrey};
+
 `;
 
 export const MainContainer = styled.div`
@@ -34,6 +36,7 @@ export const MainContainer = styled.div`
     height: auto;
     flex-direction: column;
   }
+
 `;
 
 export const FormContainer = styled.div`
@@ -47,6 +50,7 @@ export const FormContainer = styled.div`
   @media (max-width: 576px) {
     width: 100%;
   }
+
 `;
 export const TitleAndLogoContainer = styled.div`
   display: flex;
@@ -81,6 +85,7 @@ export const TitleWrapper = styled.div`
 export const Subtitle = styled.p`
   font-size: 14px;
   color: ${colorsVariables.mediumGrey};
+
   margin-bottom: 20px;
 `;
 
@@ -106,9 +111,9 @@ background-color: ${colorsVariables.white};
   border: 1px solid ${colorsVariables.black};
   outline: none;
   transition: border-color 0.3s ease;
-
   &:focus {
     border-color: ${colorsVariables.green};
+
   }
 `;
 
@@ -124,9 +129,9 @@ export const Button = styled.button`
   cursor: pointer;
   margin-bottom: 10px;
   transition: background-color 0.3s ease;
-
   &:hover {
     background-color: ${colorsVariables.mediumGreen};
+
   }
 `;
 
@@ -168,6 +173,7 @@ export const ImageContainer = styled.div`
   @media (max-width: 576px) {
     display:none;
   }
+
 `;
 
 export const LogoImage = styled.img`
@@ -177,6 +183,7 @@ height: 50%;
   width: 80%;
   height: 80%;
 }
+
 `;
 export const LogoTopContainer = styled.div`
   position: absolute;

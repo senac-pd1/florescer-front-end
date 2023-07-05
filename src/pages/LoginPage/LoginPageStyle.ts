@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { colorsVariables, devices,uiVariables } from "./../../style/VariablesStyle";
 
+
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
@@ -15,8 +16,9 @@ export const LoginPageContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+
   background-color: ${colorsVariables.lightGrey};
-`;
+
 
 export const MainContainer = styled.div`
   display: flex;
@@ -34,7 +36,7 @@ export const MainContainer = styled.div`
     flex-direction: column;
     margin: 5px; /* Adicione as margens desejadas */
   }
-`;
+
 
 export const FormContainer = styled.div`
   display: flex;
@@ -95,6 +97,7 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   margin-bottom: 10px;
   width: 65%;
+
 `;
 
 export const Label = styled.label`
@@ -112,9 +115,9 @@ export const Input = styled.input`
   border: 1px solid ${colorsVariables.black};
   outline: none;
   transition: border-color 0.3s ease;
-
   &:focus {
     border-color: ${colorsVariables.green};
+
   }
 `;
 
@@ -125,14 +128,15 @@ export const Button = styled.button`
   border-radius: 5px;
   background-color: ${colorsVariables.green};
   color: ${colorsVariables.white};
+
   font-weight: bold;
   border: none;
   cursor: pointer;
   margin-bottom: 10px;
   transition: background-color 0.3s ease;
-
   &:hover {
     background-color: ${colorsVariables.mediumGreen};
+
   }
 `;
 
@@ -145,7 +149,6 @@ export const ForgotPasswordButton = styled.button`
   margin-bottom: 5px;
   margin-left: auto;
   padding-right: 18%;
-
   &:hover {
     text-decoration: underline;
   }
@@ -156,7 +159,6 @@ export const RegisterButton = styled.button`
   color: ${colorsVariables.black};
   border: none;
   cursor: pointer;
-
   &:hover {
     text-decoration: underline;
   }
@@ -205,3 +207,4 @@ export const WarningMessage = styled.p`
 `;
 
 export default GlobalStyle;
+

@@ -27,6 +27,7 @@ import {
 } from './RegisterPageStyle';
 import { createGlobalStyle } from 'styled-components';
 import logoImage from '../../assets/logoLogin.svg';
+
 import logoTopLogin from"../../assets/LogoTopLogin.svg";
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -72,6 +73,7 @@ const RegisterPage = () => {
      email: email,
      password: senha,
      confirmPassword: senha
+
    })
    .then(response => {
     navigate('/login');
