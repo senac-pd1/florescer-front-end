@@ -25,6 +25,18 @@ a,
 li {
   text-decoration: none;
   list-style: none;
+}
+body::-webkit-scrollbar {
+  width: 7px;               
+}
+
+body::-webkit-scrollbar-track {
+  background: ${colorsVariables.lightGrey};        
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: ${colorsVariables.green};   
+  border-radius: 20px;       
 }`;
 
 export default GlobalStyle;
