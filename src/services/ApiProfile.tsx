@@ -3,7 +3,7 @@ import axios from "axios";
 //adicionar dotenv
 export const getWishlist = (userId: string, token: string) =>
   axios.create({
-    baseURL: `http://localhost:5049/wishlist/${userId}`,
+    baseURL: `https://florescerapi.azurewebsites.net/wishlist/${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -15,7 +15,7 @@ export const deleteItemWishlist = (
   plantsId: string
 ) =>
   axios.create({
-    baseURL: `http://localhost:5049/wishlist/Remove`,
+    baseURL: `https://florescerapi.azurewebsites.net/wishlist/Remove`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -23,7 +23,7 @@ export const deleteItemWishlist = (
 
 export const getMyGarden = (userId: string, token: string) =>
   axios.create({
-    baseURL: `http://localhost:5049/meujardim/${userId}`,
+    baseURL: `https://florescerapi.azurewebsites.net/meujardim/${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -35,7 +35,7 @@ export const deletePlantMyGarden = (
   plantsId: string
 ) =>
   axios.create({
-    baseURL: `http://localhost:5049/meujardim/Remove`,
+    baseURL: `https://florescerapi.azurewebsites.net/meujardim/Remove`,
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -22,7 +22,7 @@ const NavBar = ({ open }: NavBarProps) => {
   };
 
   const isProfilePage = location.pathname === "/profile";
-  const isHomePage = location.pathname === "/";
+  const isHomePage = location.pathname === "/home" || "/";
 
   return (
     <NavbarContainer open={open}>

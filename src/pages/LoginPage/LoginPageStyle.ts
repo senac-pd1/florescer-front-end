@@ -1,15 +1,10 @@
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
-import { colorsVariables, devices,uiVariables } from "./../../style/VariablesStyle";
-
-
-export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-  }
-`;
+import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
+import {
+  colorsVariables,
+  devices,
+  uiVariables,
+} from "./../../style/VariablesStyle";
 
 export const LoginPageContainer = styled.div`
   display: flex;
@@ -18,7 +13,7 @@ export const LoginPageContainer = styled.div`
   height: 100vh;
 
   background-color: ${colorsVariables.lightGrey};
-
+`;
 
 export const MainContainer = styled.div`
   display: flex;
@@ -36,7 +31,7 @@ export const MainContainer = styled.div`
     flex-direction: column;
     margin: 5px; /* Adicione as margens desejadas */
   }
-
+`;
 
 export const FormContainer = styled.div`
   display: flex;
@@ -97,7 +92,6 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   margin-bottom: 10px;
   width: 65%;
-
 `;
 
 export const Label = styled.label`
@@ -117,7 +111,6 @@ export const Input = styled.input`
   transition: border-color 0.3s ease;
   &:focus {
     border-color: ${colorsVariables.green};
-
   }
 `;
 
@@ -136,7 +129,6 @@ export const Button = styled.button`
   transition: background-color 0.3s ease;
   &:hover {
     background-color: ${colorsVariables.mediumGreen};
-
   }
 `;
 
@@ -170,12 +162,16 @@ export const ImageContainer = styled.div`
   justify-content: center;
   width: 50%;
   height: 100%;
-  background: linear-gradient(120deg, ${colorsVariables.lightGreen} 0%, ${colorsVariables.darkGreen} 100%);
+  background: linear-gradient(
+    120deg,
+    ${colorsVariables.lightGreen} 0%,
+    ${colorsVariables.darkGreen} 100%
+  );
   border-top-right-radius: ${uiVariables.borderRadius};
   border-bottom-right-radius: ${uiVariables.borderRadius};
 
   @media ${devices.mobileL} {
-    display:none;
+    display: none;
   }
 `;
 
@@ -205,6 +201,3 @@ export const WarningMessage = styled.p`
   color:color: #ff0000;
   margin-top: 5px;
 `;
-
-export default GlobalStyle;
-
