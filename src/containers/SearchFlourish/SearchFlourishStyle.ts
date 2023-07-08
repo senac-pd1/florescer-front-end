@@ -11,7 +11,7 @@ export const TitleMap = styled.h2`
 `;
 
 export const ContainerSearchFlourish = styled.section`
-  height: 600px;
+  height: 900px;
   background-color: ${colorsVariables.whiteBackground};
   width: 85%;
   margin: 20px auto;
@@ -58,7 +58,7 @@ export const ButtonSubmit = styled.button`
 `;
 
 export const MapContainer = styled.div`
-  height: 100%;
+  height: 700px;
   width: 100%;
   border-radius: 0px 0px 10px 10px;
 `;
