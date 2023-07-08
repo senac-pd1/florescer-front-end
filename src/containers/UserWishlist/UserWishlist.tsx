@@ -9,7 +9,7 @@ import {
   WishlistContainer,
 } from "./UserWishlistStyle";
 import { PlantsCard } from "../../components/PlantsCard/PlantsCard";
-import FloriculturasSearch from "../../components/Map/Map";
+import SearchFlourish from "../../components/SearchFlourish/SearchFlourish";
 import { NotFoundCard } from "../../components/NotFoundCard/NotFoundCard";
 
 interface WishListProps {
@@ -74,10 +74,8 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
         )}
       </PlantsContainer>
       <TitleWishlist>Lojas próximas</TitleWishlist>
-      <FloriculturasSearch
-        apiKey={apiKey}
-        address="Rua Javari, 292, Porto Alegre"
-      />
+
+      <SearchFlourish apiKey={apiKey} />
     </WishlistContainer>
   );
 };
