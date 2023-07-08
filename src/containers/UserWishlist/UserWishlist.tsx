@@ -9,7 +9,7 @@ import {
   WishlistContainer,
 } from "./UserWishlistStyle";
 import { PlantsCard } from "../../components/PlantsCard/PlantsCard";
-import Map from "../../components/Map/Map";
+import FloriculturasSearch from "../../components/Map/Map";
 import { NotFoundCard } from "../../components/NotFoundCard/NotFoundCard";
 
 interface WishListProps {
@@ -18,6 +18,8 @@ interface WishListProps {
 }
 
 export const UserWishlist: React.FC<WishListProps> = (props) => {
+  const apiKey = "AIzaSyCfwZVHe-xEmqaDL3w_uDF1lZvL5P3E0Ck";
+
   const handleDeletePlant = (plantId: string) => {
     props.onDeletePlant(plantId);
   };
@@ -72,7 +74,10 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
         )}
       </PlantsContainer>
       <TitleWishlist>Lojas próximas</TitleWishlist>
-      <Map />
+      <FloriculturasSearch
+        apiKey={apiKey}
+        address="Rua Javari, 292, Porto Alegre"
+      />
     </WishlistContainer>
   );
 };

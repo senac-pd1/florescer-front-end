@@ -1,112 +1,135 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Loader } from "@googlemaps/js-api-loader";
 
-const containerStyle = {
-  width: "100%",
-  height: "800px",
-  borderRadius: "0px 0px 10px 10px",
-};
+interface Floricultura {
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+}
 
-const center = {
-  lat: -30.005793238843143,
-  lng: -51.15629610313375,
-};
-const mapOptions = {
-  styles: [
-    {
-      featureType: "administrative",
-      elementType: "geometry",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.icon",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "transit",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-  ],
-};
+interface MapProps {
+  apiKey: string;
+  address: string;
+}
 
-const Map = () => {
-  const [mapLoaded, setMapLoaded] = useState(false);
+const Map: React.FC<MapProps> = ({ apiKey, address }) => {
+  const [floriculturas, setFloriculturas] = useState<Floricultura[]>([]);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const markers: google.maps.Marker[] = []; // Armazena referências aos marcadores
 
-  useEffect(() => {
-    const checkGoogleMapsLoaded = setInterval(() => {
-      if (window.google && window.google.maps) {
-        setMapLoaded(true);
-        clearInterval(checkGoogleMapsLoaded);
-      }
-    }, 100);
-    return () => clearInterval(checkGoogleMapsLoaded);
-  }, []);
-
-  const markers = [
-    { lat: -30.005793238843143, lng: -51.15629610313375 },
-    { lat: -30.008868479727226, lng: -51.156746714349126 },
-    // Adicione mais marcadores conforme necessário
-  ];
-
-  const calculateBounds = () => {
-    const bounds = new window.google.maps.LatLngBounds();
-    markers.forEach((marker) => {
-      bounds.extend(marker);
+  const loadMap = async () => {
+    const loader = new Loader({
+      apiKey: apiKey,
+      libraries: ["places"],
     });
-    return bounds;
+
+    await loader.load();
+
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ address: address }, (results, status) => {
+      if (
+        status === google.maps.GeocoderStatus.OK &&
+        results &&
+        results.length > 0
+      ) {
+        const location = results[0].geometry.location;
+        const mapBounds = {
+          nw: {
+            lat: location.lat() + 0.1,
+            lng: location.lng() - 0.1,
+          },
+          se: {
+            lat: location.lat() - 0.1,
+            lng: location.lng() + 0.1,
+          },
+        };
+
+        const map = new google.maps.Map(mapRef.current!, {
+          center: location,
+          zoom: 12,
+        });
+
+        const placesService = new google.maps.places.PlacesService(map);
+        const request = {
+          bounds: {
+            north: mapBounds.nw.lat,
+            south: mapBounds.se.lat,
+            east: mapBounds.se.lng,
+            west: mapBounds.nw.lng,
+          },
+          type: "florist",
+        };
+
+        placesService.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            const floriculturasData: Floricultura[] = results
+              .filter(
+                (result) =>
+                  result.geometry !== undefined &&
+                  result.geometry.location !== undefined
+              )
+              .map((result) => ({
+                name: result.name ?? "",
+                address: result.vicinity ?? "",
+                lat: result.geometry!.location!.lat(),
+                lng: result.geometry!.location!.lng(),
+              }));
+
+            setFloriculturas(floriculturasData);
+
+            // Adiciona marcadores para as floriculturas
+            floriculturasData.forEach((floricultura) => {
+              const marker = new google.maps.Marker({
+                position: { lat: floricultura.lat, lng: floricultura.lng },
+                map: map,
+                title: floricultura.name,
+              });
+
+              markers.push(marker); // Armazena referência ao marcador
+            });
+
+            // Adiciona marcador para o endereço com cor diferente
+            const addressMarker = new google.maps.Marker({
+              position: { lat: location.lat(), lng: location.lng() },
+              map: map,
+              title: "Endereço",
+              icon: {
+                url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+              },
+            });
+
+            markers.push(addressMarker); // Armazena referência ao marcador do endereço
+          }
+        });
+      }
+    });
   };
 
+  useEffect(() => {
+    loadMap();
+
+    // Limpa os marcadores quando o componente for desmontado
+    return () => {
+      markers.forEach((marker) => {
+        marker.setMap(null);
+      });
+    };
+  }, []);
+
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCNQzehFbFXA2dW9GgXxiKNVo3RecpdP7Q">
-      {mapLoaded && (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={12}
-          onLoad={(map) => {
-            const bounds = calculateBounds();
-            map.fitBounds(bounds);
-          }}
-          options={{
-            scrollwheel: true,
-            zoomControl: true,
-            minZoom: 4,
-            maxZoom: 20,
-            styles: mapOptions.styles,
-          }}
-        >
-          {markers.map((marker, index) => (
-            <Marker
-              key={index}
-              position={marker}
-              animation={window.google.maps.Animation.DROP}
-              icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-            />
-          ))}
-        </GoogleMap>
-      )}
-    </LoadScript>
+    <div style={{ height: "400px", width: "100%" }}>
+      <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
+      <ul>
+        {floriculturas.map((floricultura, index) => (
+          <li key={index}>
+            <strong>{floricultura.name}</strong>
+            <p>{floricultura.address}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
