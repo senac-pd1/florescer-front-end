@@ -4,11 +4,9 @@ export interface PlanstInterface {
   idealLight: string;
   watering: string;
   notification?: boolean;
-  //vem da api
   id: string;
   name: string;
   img: string;
-
   // climate: string;
   // family: string;
   // growth: string;

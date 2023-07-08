@@ -56,7 +56,7 @@ const LoginPage = () => {
         password: senha,
       })
       .then((response) => {
-        navigate("/home");
+        navigate("/");
         console.log("Usuário logado com sucesso!");
         localStorage.setItem("token", response.data.accessToken);
         localStorage.setItem("id", response.data.userToken.id);
