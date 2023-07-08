@@ -9,7 +9,7 @@ import {
   WishlistContainer,
 } from "./UserWishlistStyle";
 import { PlantsCard } from "../../components/PlantsCard/PlantsCard";
-import Map from "../../components/Map/Map";
+import SearchFlourish from "../SearchFlourish/SearchFlourish";
 import { NotFoundCard } from "../../components/NotFoundCard/NotFoundCard";
 
 interface WishListProps {
@@ -71,8 +71,6 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
           <NotFoundCard message={"Nenhuma plantinha em sua wishilist"} />
         )}
       </PlantsContainer>
-      <TitleWishlist>Lojas próximas</TitleWishlist>
-      <Map />
     </WishlistContainer>
   );
 };

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-//adicionar dotenv
 export const getWishlist = (userId: string, token: string) =>
   axios.create({
     baseURL: `https://florescerapi.azurewebsites.net/wishlist/${userId}`,

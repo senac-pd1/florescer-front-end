@@ -2,6 +2,7 @@ import { LogoHeader, NavbarContainer } from "./NavBarStyle";
 import { motion } from "framer-motion";
 import logo from "./../../../src/assets/logoHeader.svg";
 import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 interface NavBarProps {
   open: boolean;
@@ -22,7 +23,7 @@ const NavBar = ({ open }: NavBarProps) => {
   };
 
   const isProfilePage = location.pathname === "/profile";
-  const isHomePage = location.pathname === "/home" || "/";
+  const isHomePage = location.pathname === "/";
 
   return (
     <NavbarContainer open={open}>
