@@ -20,15 +20,18 @@ import {
   SearchResultsTitle,
   SearchResultSeparator,
   ButtonClean,
+  Form,
+  ButtonsFound,
 } from "./SearchBarStyle";
-import { searchFlowers } from "../../services/Api";
+import { getFlowerByName, getFlowerByLuminosity } from "../../services/Api";
+
 import {
   Flower,
   SearchBarProps,
   ButtonState,
 } from "../../interfaces/interfaces";
 import Modal from "../Modal/Modal";
-import LikeButton from "../LikeButton/LikeButton";
+import LikeButton from "../Buttons/Buttons";
 
 const useButtonStates = () => {
   const [buttonStates, setButtonStates] = useState<{
@@ -68,9 +71,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchDisabled, setSearchDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showSearchResults, setShowSearchResults] = useState(true);
-
   const { buttonStates, handleLikeClick, handleWishlistClick } =
     useButtonStates();
+  // Inside the SearchBar component, add the following:
+  const [isFilterOptionsVisible, setFilterOptionsVisible] = useState(false);
+
+  const toggleFilterOptions = () => {
+    setFilterOptionsVisible((prevState) => !prevState);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -92,15 +100,23 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     try {
       setErrorMessage("");
-      const flowers = await searchFlowers(query);
-      const filteredFlowers = flowers.filter(
-        (flower) =>
-          selectedLuminosity === "" || flower.Luminosity === selectedLuminosity
-      );
-
-      setFoundFlowers(filteredFlowers);
-      onSearch(filteredFlowers);
-      setShowSearchResults(true);
+      if (selectedLuminosity) {
+        const flowers = await getFlowerByLuminosity(selectedLuminosity);
+        setFoundFlowers(flowers);
+        onSearch(flowers);
+        setShowSearchResults(true);
+      } else {
+        const flower = await getFlowerByName(query);
+        if (flower) {
+          setFoundFlowers([flower]);
+          onSearch([flower]);
+          setShowSearchResults(true);
+        } else {
+          setFoundFlowers([]);
+          setErrorMessage("Nenhuma planta encontrada com esse nome.");
+          setShowSearchResults(false);
+        }
+      }
     } catch (error) {
       console.error(error);
     }
@@ -115,28 +131,41 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   const handleFilterClick = () => {
-    setShowFilter(!showFilter);
-    setSearchDisabled(!showFilter);
+    setShowFilter((prevShowFilter) => !prevShowFilter);
+    setSearchDisabled((prevSearchDisabled) => !prevSearchDisabled);
     if (!showFilter) {
       setQuery("");
     }
   };
 
-  const handleLuminositySelect = (luminosity: string) => {
+  const handleLuminositySelect = async (luminosity: string) => {
     setSelectedLuminosity((prevLuminosity) =>
       prevLuminosity === luminosity ? "" : luminosity
     );
+
+    try {
+      if (luminosity) {
+        const flowers = await getFlowerByLuminosity(luminosity);
+        setFoundFlowers(flowers);
+        onSearch(flowers);
+        setShowSearchResults(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleClearSearch = () => {
-    setQuery("");
+    setSelectedLuminosity("");
+    setFoundFlowers([]);
     setShowSearchResults(false);
+    setSelectedFlower(null);
   };
 
   return (
     <SearchContainer>
       <DivSearchBar>
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <InputSearch
             placeholder="Pesquise sua planta favorita"
             type="text"
@@ -155,7 +184,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
               <MdOutlineCleaningServices /> Limpar Pesquisa
             </ButtonClean>
           )}
-        </form>
+        </Form>
+
         {showFilter && (
           <FilterOptions>
             <FilterGroup>
@@ -187,21 +217,33 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             <SearchResultsTitle>Resultado da Busca</SearchResultsTitle>
             <FoundFlowerRow>
               {foundFlowers.map((flower) => (
-                <FoundFlowerItem key={flower.Id}>
+                <FoundFlowerItem key={flower.id}>
                   <FoundFlowerImg
-                    src={flower.Img}
-                    alt={flower.Name}
+                    src={flower.img}
+                    alt={flower.name}
                     onClick={() => handleFlowerClick(flower)}
                   />
-                  <FoundFlowerName>{flower.Name}</FoundFlowerName>
-                  <LikeButton
-                    isLiked={buttonStates[flower.Id]?.isLiked}
-                    isInWishlist={buttonStates[flower.Id]?.isInWishlist}
-                    onClick={() => handleLikeClick(flower.Id)}
-                    onWishlistClick={() => handleWishlistClick(flower.Id)}
-                  />
+                  <FoundFlowerName>{flower.name}</FoundFlowerName>
+                  <ButtonsFound>
+                    <LikeButton
+                      isLiked={buttonStates[flower.id]?.isLiked}
+                      isInWishlist={buttonStates[flower.id]?.isInWishlist}
+                      onClick={() => handleLikeClick(flower.id)}
+                      onWishlistClick={() => handleWishlistClick(flower.id)}
+                      id={undefined}
+                    />
+                  </ButtonsFound>
                 </FoundFlowerItem>
               ))}
+              {foundFlowers.length % 4 !== 0 &&
+                Array.from({ length: 4 - (foundFlowers.length % 4) }).map(
+                  (_, index) => (
+                    <div
+                      key={`empty-${index}`}
+                      style={{ visibility: "hidden" }}
+                    />
+                  )
+                )}
             </FoundFlowerRow>
             <SearchResultSeparator />
           </>
@@ -211,12 +253,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         <Modal
           flower={selectedFlower}
           onClose={handleCloseModal}
-          isLiked={buttonStates[selectedFlower.Id]?.isLiked}
-          isInWishlist={buttonStates[selectedFlower.Id]?.isInWishlist}
-          onLikeClick={() => handleLikeClick(selectedFlower.Id)}
-          onWishlistClick={() => handleWishlistClick(selectedFlower.Id)}
-          onModalLikeClick={() => handleLikeClick(selectedFlower.Id)}
-          onModalWishlistClick={() => handleWishlistClick(selectedFlower.Id)}
+          isLiked={buttonStates[selectedFlower.id]?.isLiked}
+          isInWishlist={buttonStates[selectedFlower.id]?.isInWishlist}
+          onLikeClick={() => handleLikeClick(selectedFlower.id)}
+          onWishlistClick={() => handleWishlistClick(selectedFlower.id)}
+          onModalLikeClick={() => handleLikeClick(selectedFlower.id)}
+          onModalWishlistClick={() => handleWishlistClick(selectedFlower.id)}
         />
       )}
     </SearchContainer>

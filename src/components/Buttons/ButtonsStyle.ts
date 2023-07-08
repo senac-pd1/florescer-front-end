@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colorsVariables, devices } from "./../../style/VariablesStyle";
+import { colorsVariables } from "../../style/VariablesStyle";
 
 export const LikeFlower = styled.button`
   /* Estilos do botão de like */

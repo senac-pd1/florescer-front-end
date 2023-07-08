@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { getFlowerNamesAndImages, searchFlowers } from "../../services/Api";
+import { getFlowerNamesAndImages } from "../../services/Api";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Modal from "../../components/Modal/Modal";
-import LikeButton from "../../components/LikeButton/LikeButton";
+import LikeButton from "../../components/Buttons/Buttons";
 import {
   Container,
   FlowerRow,
   FlowerItem,
   FlowerImg,
   FlowerName,
+  ButtonsListing,
 } from "./PlantListingStyle";
-
 import { Flower, ButtonState } from "../../interfaces/interfaces";
 
 const PlantListing: React.FC = () => {
@@ -21,7 +21,7 @@ const PlantListing: React.FC = () => {
   const [buttonStates, setButtonStates] = useState<{
     [key: string]: ButtonState;
   }>({});
-
+  const [showAllFlowers, setShowAllFlowers] = useState(true);
   useEffect(() => {
     fetchFlowers();
   }, []);
@@ -33,7 +33,7 @@ const PlantListing: React.FC = () => {
 
       const initialButtonStates: { [key: string]: ButtonState } = {};
       flowersData.forEach((flower) => {
-        initialButtonStates[flower.Id] = {
+        initialButtonStates[flower.id] = {
           isLiked: false,
           isInWishlist: false,
         };
@@ -56,22 +56,26 @@ const PlantListing: React.FC = () => {
   };
 
   const handleSearch = async (query: string) => {
-    if (!query) {
-      setErrorMessage(
-        "Por favor, digite algo na barra de pesquisa ou selecione uma opção do filtro."
-      );
+    if (!query || typeof query !== "string") {
+      setErrorMessage("");
       setSearchedFlowers([]);
+      setShowAllFlowers(true);
       return;
     }
 
     try {
       setErrorMessage("");
-      const data = await searchFlowers(query);
-      setSearchedFlowers(data);
+      const data = await getFlowerNamesAndImages();
+      const filteredFlowers = data.filter(
+        (flower) =>
+          flower.name.charAt(0).toUpperCase() === query.charAt(0).toUpperCase()
+      );
+      setSearchedFlowers(filteredFlowers);
+      setShowAllFlowers(filteredFlowers.length === 0);
     } catch (error) {
       console.error(error);
-      setErrorMessage("Ocorreu um erro, tente novamente!");
       setSearchedFlowers([]);
+      setShowAllFlowers(true);
     }
   };
 
@@ -86,14 +90,13 @@ const PlantListing: React.FC = () => {
   };
 
   const handleWishlistClick = (flowerId: string) => {
-    setButtonStates((prevButtonStates) => {
-      const newState = { ...prevButtonStates };
-      newState[flowerId] = {
-        ...newState[flowerId],
-        isInWishlist: !newState[flowerId]?.isInWishlist || false,
-      };
-      return newState;
-    });
+    setButtonStates((prevButtonStates) => ({
+      ...prevButtonStates,
+      [flowerId]: {
+        ...prevButtonStates[flowerId],
+        isInWishlist: !prevButtonStates[flowerId]?.isInWishlist || false,
+      },
+    }));
   };
 
   return (
@@ -103,41 +106,47 @@ const PlantListing: React.FC = () => {
         <div>{errorMessage}</div>
       ) : (
         <>
-          {searchedFlowers.length === 0 ? (
+          {showAllFlowers ? (
             <>
               <FlowerRow>
                 {flowers.slice(0, 4).map((flower) => (
-                  <FlowerItem key={flower.Id}>
+                  <FlowerItem key={flower.id}>
                     <FlowerImg
-                      src={flower.Img}
-                      alt={flower.Name}
+                      src={flower.img}
+                      alt={flower.name}
                       onClick={() => handleFlowerClick(flower)}
                     />
-                    <FlowerName>{flower.Name}</FlowerName>
-                    <LikeButton
-                      isLiked={buttonStates[flower.Id]?.isLiked}
-                      isInWishlist={buttonStates[flower.Id]?.isInWishlist}
-                      onClick={() => handleLikeClick(flower.Id)}
-                      onWishlistClick={() => handleWishlistClick(flower.Id)}
-                    />
+                    <FlowerName>{flower.name}</FlowerName>
+                    <ButtonsListing>
+                      <LikeButton
+                        isLiked={buttonStates[flower.id]?.isLiked}
+                        isInWishlist={buttonStates[flower.id]?.isInWishlist}
+                        onClick={() => handleLikeClick(flower.id)}
+                        onWishlistClick={() => handleWishlistClick(flower.id)}
+                        id={flower.id}
+                      />
+                    </ButtonsListing>
                   </FlowerItem>
                 ))}
               </FlowerRow>
               <FlowerRow>
                 {flowers.slice(4, 8).map((flower) => (
-                  <FlowerItem key={flower.Id}>
+                  <FlowerItem key={flower.id}>
                     <FlowerImg
-                      src={flower.Img}
-                      alt={flower.Name}
+                      src={flower.img}
+                      alt={flower.name}
                       onClick={() => handleFlowerClick(flower)}
                     />
-                    <FlowerName>{flower.Name}</FlowerName>
-                    <LikeButton
-                      isLiked={buttonStates[flower.Id]?.isLiked}
-                      isInWishlist={buttonStates[flower.Id]?.isInWishlist}
-                      onClick={() => handleLikeClick(flower.Id)}
-                      onWishlistClick={() => handleWishlistClick(flower.Id)}
-                    />
+                    <FlowerName>{flower.name}</FlowerName>
+                    <ButtonsListing>
+                      <LikeButton
+                        isLiked={buttonStates[flower.id]?.isLiked}
+                        isInWishlist={buttonStates[flower.id]?.isInWishlist}
+                        onClick={() => handleLikeClick(flower.id)}
+                        onWishlistClick={() => handleWishlistClick(flower.id)}
+                        id={flower.id}
+                      />
+                    </ButtonsListing>
                   </FlowerItem>
                 ))}
               </FlowerRow>
@@ -145,19 +154,22 @@ const PlantListing: React.FC = () => {
           ) : (
             <FlowerRow>
               {searchedFlowers.map((flower) => (
-                <FlowerItem key={flower.Id}>
+                <FlowerItem key={flower.id}>
                   <FlowerImg
-                    src={flower.Img}
-                    alt={flower.Name}
+                    src={flower.img}
+                    alt={flower.name}
                     onClick={() => handleFlowerClick(flower)}
                   />
-                  <FlowerName>{flower.Name}</FlowerName>
-                  <LikeButton
-                    isLiked={buttonStates[flower.Id]?.isLiked}
-                    isInWishlist={buttonStates[flower.Id]?.isInWishlist}
-                    onClick={() => handleLikeClick(flower.Id)}
-                    onWishlistClick={() => handleWishlistClick(flower.Id)}
-                  />
+                  <FlowerName>{flower.name}</FlowerName>
+                  <ButtonsListing>
+                    <LikeButton
+                      isLiked={buttonStates[flower.id]?.isLiked}
+                      isInWishlist={buttonStates[flower.id]?.isInWishlist}
+                      onClick={() => handleLikeClick(flower.id)}
+                      onWishlistClick={() => handleWishlistClick(flower.id)}
+                      id={flower.id}
+                    />
+                  </ButtonsListing>
                 </FlowerItem>
               ))}
             </FlowerRow>
@@ -168,12 +180,12 @@ const PlantListing: React.FC = () => {
         <Modal
           flower={selectedFlower}
           onClose={handleCloseModal}
-          isLiked={buttonStates[selectedFlower.Id]?.isLiked}
-          isInWishlist={buttonStates[selectedFlower.Id]?.isInWishlist}
-          onLikeClick={() => handleLikeClick(selectedFlower.Id)}
-          onWishlistClick={() => handleWishlistClick(selectedFlower.Id)}
-          onModalLikeClick={() => handleLikeClick(selectedFlower.Id)}
-          onModalWishlistClick={() => handleWishlistClick(selectedFlower.Id)}
+          isLiked={buttonStates[selectedFlower.id]?.isLiked}
+          isInWishlist={buttonStates[selectedFlower.id]?.isInWishlist}
+          onLikeClick={() => handleLikeClick(selectedFlower.id)}
+          onWishlistClick={() => handleWishlistClick(selectedFlower.id)}
+          onModalLikeClick={() => handleLikeClick(selectedFlower.id)}
+          onModalWishlistClick={() => handleWishlistClick(selectedFlower.id)}
         />
       )}
     </Container>

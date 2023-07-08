@@ -43,7 +43,7 @@ export const ModalTitle = styled.h3`
   text-align: center;
   margin-bottom: 20px;
   margin-top: 30px;
-  max-width: 90%; 
+  max-width: 100%; 
 
   @media (min-width: 768px) {
     margin-top: 50px; 
@@ -59,12 +59,12 @@ export const ModalTitle = styled.h3`
 }
 `;
 
-export const TextModal = styled.p`
+export const ModalSubTitle = styled.p`
   color: ${colorsVariables.darkGreen};
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: -10px;
+  margin-top: -20px;
+  margin-bottom: 30px;
 `;
 
 export const ModalImg = styled.img`
@@ -110,7 +110,7 @@ export const ButtonContainer = styled.div`
   align-items: flex-end;
   gap: 10px;
   margin-top: -50px;
-  margin-left: 400px;
+  margin-left: 450px;
 
   @media (max-width: 768px) {
     margin-top: 3px;

@@ -1,33 +1,28 @@
 import styled, { css } from "styled-components";
-import { colorsVariables } from "./../../style/VariablesStyle";
+import { colorsVariables, devices } from "./../../style/VariablesStyle";
 
 export const DivSearchBar = styled.div`
-  margin-bottom: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto;
-  grid-gap: 20px;
-  justify-items: center;
+  margin-right: 25%;
 `;
 
 export const InputSearch = styled.input`
-  width: 100%;
+  margin-left: center;
   padding: 10px;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
   border-radius: 4px;
   outline: none;
-  margin-top: 50px;
 `;
 
 export const ButtonSearch = styled.button`
+  flex: 0 0 auto;
   background-color: ${colorsVariables.green};
   border: none;
-  color: white;
+  color: ${colorsVariables.white};
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 4px;
-  outline: none;
+  margin-left: 5px;
 `;
 
 export const SearchResultsTitle = styled.h3`
@@ -35,19 +30,24 @@ export const SearchResultsTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-top: 25px;
+  text-align: center;
+  margin-left: 25%;
 `;
 
 export const SearchResultSeparator = styled.div`
-  width: 100%;
   height: 2px;
   background-color: ${colorsVariables.black};
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-left: 20%;
 `;
 
 export const MensasageError = styled.p`
   color: ${colorsVariables.darkGreen};
-  margin-top: 5px;
+  margin-top: 15px;
+  text-align: center;
+  margin-left: 15%;
 `;
 
 export const FilterContainer = styled.div`
@@ -65,46 +65,48 @@ export const FilterGroup = styled.div`
 export const FilterTitle = styled.p`
   font-weight: bold;
   margin-bottom: 5px;
+  font-size: 15px;
   color: ${colorsVariables.mediumDarkGreen};
 `;
 
-interface FilterOptionProps {
-  selected?: boolean;
-}
-
 export const ButtonFilter = styled.button`
+  flex: 0 0 auto;
+  display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 15px;
+  margin-left: 5px;
   padding: 10px;
   border-radius: 5px;
-  background-color: ${colorsVariables.mediumGrey};
-  color: #${colorsVariables.white};
+  background-color: ${colorsVariables.white};
   border: none;
   cursor: pointer;
-  margin-top: 10px;
-  margin-left: 10px;
+`;
+
+export const FilterButtonText = styled.span`
+  margin-left: 5px;
+  white-space: nowrap;
 `;
 
 export const ButtonClean = styled.button`
   align-items: center;
-  justify-content: center;
   padding: 10px;
   border-radius: 5px;
   background-color: ${colorsVariables.mediumGrey};
   color: #${colorsVariables.white};
   border: none;
   cursor: pointer;
-  margin-top: 10px;
-  margin-left: 10px;
+
+  margin-left: 5px;
 `;
 
 export const FilterOptions = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 10px;
+  gap: 10px;
   justify-items: center;
-  margin-top: 15px;
-  margin-bottom: 35px;
+  margin-top: 5px;
+  margin-right: -280px;
 `;
 
 export const FilterOption = styled.button<{ selected: boolean }>`
@@ -126,31 +128,37 @@ export const FilterOption = styled.button<{ selected: boolean }>`
 `;
 
 export const FoundFlowerRow = styled.div`
+  background-color: ${colorsVariables.lightGreen};
   display: flex;
-  margin-bottom: 20px;
-
-  align-content: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  margin-left: 25%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const FoundFlowerItem = styled.div`
   background: ${colorsVariables.mediumDarkGreen};
-  box-shadow: ${colorsVariables.boxShadow};
-  display: inline-block;
   box-sizing: border-box;
   margin: 20px;
+  padding: 10px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  box-shadow: ${colorsVariables.boxShadow};
 `;
 
 export const FoundFlowerImg = styled.img`
-  width: 150px;
+  width: 180px;
   height: 150px;
+  margin-top: 5px;
   border-radius: 10px;
-  margin-top: -15px;
   box-shadow: ${colorsVariables.boxShadow};
   cursor: pointer;
 `;
@@ -159,9 +167,6 @@ export const FoundFlowerName = styled.span`
   color: white;
   margin-top: 10px;
   text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   max-width: 150px;
 `;
 
@@ -174,8 +179,23 @@ export const FoundLikeFlower = styled.button`
   heigth: 50px;
 `;
 
+export const ButtonsFound = styled.div`
+  margin: 10px;
+`;
+
 export const SearchContainer = styled.div`
+  margin-top: 80px;
+  width: 100%;
+  margin-left: 10%;
+`;
+
+export const Form = styled.form`
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-left: 140px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;

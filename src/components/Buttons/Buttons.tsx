@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { LikeButtonProps } from "../../interfaces/interfaces";
 import { FcLike, FcDislike } from "react-icons/fc";
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
-import { LikeFlower } from "./LikeButtonStyle";
+import { LikeFlower } from "./ButtonsStyle";
+
+import { addToWishlist } from "../../services/Api";
 
 const LikeButton: React.FC<LikeButtonProps> = ({
+  id,
   isLiked,
   isInWishlist,
   onClick,
@@ -38,26 +41,25 @@ const LikeButton: React.FC<LikeButtonProps> = ({
 
   const handleLikeClick = () => {
     if (isLiked) {
-      // Lógica para remover do jardim do usuário
       console.log("Removido do jardim do usuário");
     } else {
-      // Lógica para adicionar ao jardim do usuário
       console.log("Adicionado ao jardim do usuário");
     }
 
     onClick();
   };
 
-  const handleWishlistClick = () => {
+  const handleWishlistClick = async () => {
     if (isInWishlist) {
-      // Lógica para remover da lista de desejos do usuário
       console.log("Removido da lista de desejos do usuário");
     } else {
-      // Lógica para adicionar à lista de desejos do usuário
       console.log("Adicionado à lista de desejos do usuário");
     }
 
-    onWishlistClick();
+    const addedToWishlist = await addToWishlist(id);
+    if (addedToWishlist) {
+      onWishlistClick();
+    }
   };
 
   return (

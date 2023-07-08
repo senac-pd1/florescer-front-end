@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { createGlobalStyle } from "styled-components";
-import { Flower, ModalProps } from "../../interfaces/interfaces";
-import LikeButton from "../LikeButton/LikeButton";
+import { ModalProps } from "../../interfaces/interfaces";
+import LikeButton from "../Buttons/Buttons";
 import { GrClose } from "react-icons/gr";
 import {
   ModalContainer,
   ModalImg,
   ModalTitle,
   CloseModalButton,
-  TextModal,
+  ModalSubTitle,
   TabelaModal,
   ButtonContainer,
 } from "./ModalStyle";
@@ -24,11 +24,11 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   isLiked,
   isInWishlist,
-  onLikeClick,
-  onWishlistClick,
   onModalLikeClick,
   onModalWishlistClick,
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     document.body.classList.add("modal-open");
 
@@ -38,39 +38,48 @@ const Modal: React.FC<ModalProps> = ({
       }
     };
 
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
     document.addEventListener("keydown", handleEscKeyPress);
+    document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
       document.body.classList.remove("modal-open");
       document.removeEventListener("keydown", handleEscKeyPress);
+      document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
   return (
     <>
       <GlobalStyle />
-      <ModalContainer>
+      <ModalContainer ref={modalRef}>
         <CloseModalButton onClick={onClose}>
           <GrClose />
         </CloseModalButton>
-        <ModalTitle>{flower.Name}</ModalTitle>
-        <TextModal>({flower.Name})</TextModal>
-        <ModalImg src={flower.Img} alt={flower.Name} />
+        <ModalTitle>{flower.name}</ModalTitle>
+        <ModalSubTitle>({flower.scientificName})</ModalSubTitle>
+        <ModalImg src={flower.img} alt={flower.name} />
         <TabelaModal>
           <li>
-            <strong>Familia</strong>: {flower.Family}
+            <strong>Familia</strong>: {flower.family}
           </li>
           <li>
-            <strong>Crescimento</strong>: {flower.Growth}
+            <strong>Crescimento</strong>: {flower.growth}
+          </li>
+
+          <li>
+            <strong>Clima</strong>: {flower.climate}
           </li>
           <li>
-            <strong>Rega</strong>: {flower.Irrigation}
-          </li>
-          <li>
-            <strong>Clima</strong>: {flower.Climate}
-          </li>
-          <li>
-            <strong>Luz Ideal</strong>: {flower.Luminosity}
+            <strong>Luz Ideal</strong>: {flower.luminosity}
           </li>
         </TabelaModal>
         <ButtonContainer>
@@ -79,6 +88,7 @@ const Modal: React.FC<ModalProps> = ({
             isInWishlist={isInWishlist}
             onClick={onModalLikeClick}
             onWishlistClick={onModalWishlistClick}
+            id={undefined}
           />
         </ButtonContainer>
       </ModalContainer>
@@ -87,3 +97,4 @@ const Modal: React.FC<ModalProps> = ({
 };
 
 export default Modal;
+

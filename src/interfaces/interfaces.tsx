@@ -1,4 +1,5 @@
 export interface LikeButtonProps {
+  id: any;
   isLiked: boolean;
   isInWishlist: boolean;
   onClick: () => void;
@@ -6,14 +7,15 @@ export interface LikeButtonProps {
 }
 
 export interface Flower {
-  Id: string;
-  Growth: string;
-  Img: string;
-  Climate: string;
-  Name: string;
-  Family: string;
-  Irrigation: string;
-  Luminosity: string;
+  name: string;
+  img: string;
+  luminosity: string;
+  id: string;
+  growth: string;
+  family: string;
+  irrigation: string;
+  climate: string;
+  scientificName: string;
 }
 
 export interface ModalProps {
