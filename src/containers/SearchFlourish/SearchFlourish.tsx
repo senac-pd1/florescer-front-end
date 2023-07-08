@@ -8,6 +8,7 @@ import {
   InputSearch,
   MapContainer,
   SearchContainer,
+  TitleMap,
 } from "./SearchFlourishStyle";
 interface Flourish {
   name: string;
@@ -180,6 +181,7 @@ const SearchFlourish: React.FC<MapProps> = ({ apiKey }) => {
 
   return (
     <ContainerSearchFlourish>
+      <TitleMap>Lojas próximas</TitleMap>
       <SearchContainer>
         <InputSearch
           type="text"

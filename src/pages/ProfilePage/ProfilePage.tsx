@@ -10,11 +10,12 @@ import {
 import { useEffect, useState } from "react";
 import { PlanstInterface } from "../../model/PlanstInterface";
 import { ContainerProfilePage } from "./ProfilePageStyle";
+import SearchFlourish from "../../containers/SearchFlourish/SearchFlourish";
 
 const ProfilePage = () => {
   const [wishlist, setWishlist] = useState([]);
   const [garden, setGarden] = useState([]);
-
+  const apiKey = "AIzaSyCfwZVHe-xEmqaDL3w_uDF1lZvL5P3E0Ck";
   const getWishlistRequest = async (userId: string | any) => {
     const token = localStorage.getItem("token");
 
@@ -78,6 +79,7 @@ const ProfilePage = () => {
         wishlistPlants={wishlist}
         onDeletePlant={handleDeletePlant}
       />
+      <SearchFlourish apiKey={apiKey} />
     </ContainerProfilePage>
   );
 };

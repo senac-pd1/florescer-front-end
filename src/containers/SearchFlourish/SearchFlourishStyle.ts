@@ -1,9 +1,22 @@
 import styled from "styled-components";
 import { colorsVariables, uiVariables } from "../../style/VariablesStyle";
 
+export const TitleMap = styled.h2`
+  padding: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  color: ${colorsVariables.green};
+  border-bottom: 2px solid ${colorsVariables.mediumGreenTransparent};
+  margin-bottom: 20px;
+`;
+
 export const ContainerSearchFlourish = styled.section`
-  width: 100%;
-  height: 800px;
+  height: 600px;
+  background-color: ${colorsVariables.whiteBackground};
+  width: 85%;
+  margin: 20px auto;
+  border-radius: 10px;
+  position: relative;
 `;
 export const SearchContainer = styled.div`
   margin: 40px auto;

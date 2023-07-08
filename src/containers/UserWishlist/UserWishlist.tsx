@@ -9,7 +9,7 @@ import {
   WishlistContainer,
 } from "./UserWishlistStyle";
 import { PlantsCard } from "../../components/PlantsCard/PlantsCard";
-import SearchFlourish from "../../components/SearchFlourish/SearchFlourish";
+import SearchFlourish from "../SearchFlourish/SearchFlourish";
 import { NotFoundCard } from "../../components/NotFoundCard/NotFoundCard";
 
 interface WishListProps {
@@ -18,8 +18,6 @@ interface WishListProps {
 }
 
 export const UserWishlist: React.FC<WishListProps> = (props) => {
-  const apiKey = "AIzaSyCfwZVHe-xEmqaDL3w_uDF1lZvL5P3E0Ck";
-
   const handleDeletePlant = (plantId: string) => {
     props.onDeletePlant(plantId);
   };
@@ -73,9 +71,6 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
           <NotFoundCard message={"Nenhuma plantinha em sua wishilist"} />
         )}
       </PlantsContainer>
-      <TitleWishlist>Lojas próximas</TitleWishlist>
-
-      <SearchFlourish apiKey={apiKey} />
     </WishlistContainer>
   );
 };
