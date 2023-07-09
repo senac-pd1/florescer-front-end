@@ -54,15 +54,15 @@ export const UserWishlist: React.FC<WishListProps> = (props) => {
         </TextCardWishlist>
       </ContainerInfoWishlist>
       <PlantsContainer>
-        {props.wishlistPlants.length > 0 ? (
+        {props.wishlistPlants.length > 0 && props.wishlistPlants !== null ? (
           <>
             {props.wishlistPlants.map((plants: PlanstInterface) => (
               <PlantsCard
-                key={plants.id}
-                name={plants.name}
-                image={plants.img}
+                key={plants?.id}
+                name={plants?.name}
+                image={plants?.img}
                 isWishlist={true}
-                plantId={plants.id}
+                plantId={plants?.id}
                 onDeletePlant={handleDeletePlant}
               />
             ))}

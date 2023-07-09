@@ -1,52 +1,100 @@
-import { FcLikePlaceholder } from "react-icons/fc";
-import { Flower } from "../../services/Api";
+import React, { useEffect, useRef } from "react";
+import { createGlobalStyle } from "styled-components";
+import { ModalProps } from "../../interfaces/interfaces";
+import LikeButton from "../Buttons/Buttons";
+import { GrClose } from "react-icons/gr";
 import {
   ModalContainer,
   ModalImg,
   ModalTitle,
   CloseModalButton,
-  TextModal,
-  LikeFlowerModal,
+  ModalSubTitle,
   TabelaModal,
+  ButtonContainer,
 } from "./ModalStyle";
-import { GrClose } from "react-icons/gr";
 
-interface ModalProps {
-  flower: Flower;
-  onClose: () => void;
-}
+const GlobalStyle = createGlobalStyle`
+  body.modal-open {
+    overflow: hidden;
+  }
+`;
 
-const Modal: React.FC<ModalProps> = ({ flower, onClose }) => {
+const Modal: React.FC<ModalProps> = ({
+  flower,
+  onClose,
+  isLiked,
+  isInWishlist,
+  onModalLikeClick,
+  onModalWishlistClick,
+}) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.body.classList.add("modal-open");
+
+    const handleEscKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscKeyPress);
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.body.classList.remove("modal-open");
+      document.removeEventListener("keydown", handleEscKeyPress);
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <ModalContainer>
-      <CloseModalButton onClick={onClose}>
-        <GrClose />
-      </CloseModalButton>
-      <ModalTitle>{flower.nomeComum}</ModalTitle>
-      <TextModal>{flower.nomeLatino}</TextModal>
-      <ModalImg src={flower.img} alt={flower.nomeComum} />
-      <TabelaModal>
-        <li>
-          <strong>Rega</strong>: {flower.rega}
-        </li>
-        <li>
-          <strong>Clima</strong>: {flower.clima}
-        </li>
-        <li>
-          <strong>Luz tolerada</strong>: {flower.luzTolerada}
-        </li>
-        <li>
-          <strong>Luz ideal</strong>: {flower.luzIdeal}
-        </li>
-        <li>
-          <strong>Temperatura max.</strong>: {flower.temperaturaMax}
-        </li>
-      </TabelaModal>
-      <LikeFlowerModal>
-        <FcLikePlaceholder />
-      </LikeFlowerModal>
-    </ModalContainer>
+    <>
+      <GlobalStyle />
+      <ModalContainer ref={modalRef}>
+        <CloseModalButton onClick={onClose}>
+          <GrClose />
+        </CloseModalButton>
+        <ModalTitle>{flower.name}</ModalTitle>
+        <ModalSubTitle>({flower.scientificName})</ModalSubTitle>
+        <ModalImg src={flower.img} alt={flower.name} />
+        <TabelaModal>
+          <li>
+            <strong>Familia</strong>: {flower.family}
+          </li>
+          <li>
+            <strong>Crescimento</strong>: {flower.growth}
+          </li>
+
+          <li>
+            <strong>Clima</strong>: {flower.climate}
+          </li>
+          <li>
+            <strong>Luz Ideal</strong>: {flower.luminosity}
+          </li>
+        </TabelaModal>
+        <ButtonContainer>
+          <LikeButton
+            isLiked={isLiked}
+            isInWishlist={isInWishlist}
+            onClick={onModalLikeClick}
+            onWishlistClick={onModalWishlistClick}
+            id={undefined}
+          />
+        </ButtonContainer>
+      </ModalContainer>
+    </>
   );
 };
 
 export default Modal;
+

@@ -1,0 +1,224 @@
+{
+  "plants": [
+    {
+      "name": "Dracaena",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/dracena.png",
+      "luminosity": "Luz forte",
+      "id": "bd01771e-56c0-447b-bb99-5ebb5056a2c6",
+      "growth": "Regular",
+      "family": "Liliaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Dracena"
+    },
+    {
+      "name": "Peperomia",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/peperomia.png",
+      "luminosity": "Luz fraca",
+      "id": "68d2282f-443b-4abc-a2c9-a336e2540812",
+      "growth": "Regular",
+      "family": "Piperaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Peperomia"
+    },
+    {
+      "name": "Bromelia",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/bromelia.jpg",
+      "luminosity": "Luz forte",
+      "id": "22eb8425-c01f-4457-9942-0cf958a29349",
+      "growth": "Regular",
+      "family": "Bromeliaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Bromeliaceae"
+    },
+    {
+      "name": "Girassol",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/girassol.jpg",
+      "luminosity": "Luz forte",
+      "id": "8b8f0a17-c020-4053-a013-bedebcd1310f",
+      "growth": "Regular",
+      "family": "Asteraceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Helianthus annuus"
+    },
+    {
+      "name": "Samambaia",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/samambaia.png",
+      "luminosity": "Luz fraca",
+      "id": "5c40b2ed-e7da-43dd-9f5e-1ad376744291",
+      "growth": "Regular",
+      "family": "Pteridaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Tracheophyta"
+    },
+    {
+      "name": "Palmeira ondulada",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/palmeiraondulada.png",
+      "luminosity": "Luz forte",
+      "id": "fa08d5c7-6872-47f2-bc27-b97706913b67",
+      "growth": "Regular",
+      "family": "Arecaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Philodendron undulatum"
+    },
+    {
+      "name": "Maranta",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/maranta.png",
+      "luminosity": "Luz forte",
+      "id": "46db803a-8973-4e24-b0b3-889a188604d2",
+      "growth": "Regular",
+      "family": "Marantaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Ctenanthe oppenheimiana"
+    },
+    {
+      "name": "Cacto",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/cacto.png",
+      "luminosity": "Luz forte",
+      "id": "bfebe447-35f2-4b9d-acd3-3bbe925f258c",
+      "growth": "Regular",
+      "family": "Cactaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Cactaceae"
+    },
+    {
+      "name": "Filodrendo",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/filodrendo.png",
+      "luminosity": "Luz fraca",
+      "id": "216f8f52-b38a-42c2-afec-001ff15f3cad",
+      "growth": "Regular",
+      "family": "Araceas",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Philodendron"
+    },
+    {
+      "name": "Trombeta",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/trombeta.png",
+      "luminosity": "Luz forte",
+      "id": "96c872d1-e420-4fed-b752-275141b2be7a",
+      "growth": "Regular",
+      "family": "Apocynaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Brugmansia suaveolens"
+    },
+    {
+      "name": "Matanta-peluda",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/matantapeluda.png",
+      "luminosity": "Luz forte",
+      "id": "24ef7264-1c7a-4748-a1f2-169a3f369b9b",
+      "growth": "Regular",
+      "family": "Marantaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Goeppertia rufibarba"
+    },
+    {
+      "name": "Lirio",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/lirio.png",
+      "luminosity": "Luz forte",
+      "id": "9af88ee0-29d3-43c6-8e91-6b7c56b6b593",
+      "growth": "Regular",
+      "family": "Araceas",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Spathiphyllum wallisii"
+    },
+    {
+      "name": "Alocasia",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/alocasia.png",
+      "luminosity": "Luz forte",
+      "id": "a7f6be37-7486-4508-aae0-c1994d1e9a79",
+      "growth": "Regular",
+      "family": "Araceas",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Alocasia Cuprea"
+    },
+    {
+      "name": "Anturio",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/anturio.png",
+      "luminosity": "Luz forte",
+      "id": "915e6d28-6708-4d82-bfc1-280d54539c3b",
+      "growth": "Regular",
+      "family": "Araceas",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Anthurium"
+    },
+    {
+      "name": "Espada de São Jorge",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/espadasaojorge.png",
+      "luminosity": "Meia sombra",
+      "id": "135dda93-0fec-4e77-9033-d1197684e587",
+      "growth": "Regular",
+      "family": "Asparagaceae",
+      "irrigation": "Manter úmido",
+      "climate": "Tropical",
+      "scientificName": "Dracaena trifasciata"
+    },
+    {
+      "name": "Planta borboleta",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/borboleta.png",
+      "luminosity": "Meia sombra",
+      "id": "3ed24873-8bdb-427b-a8f6-adcfa9d03817",
+      "growth": "Regular",
+      "family": "OxalIdaceae",
+      "irrigation": "Manter úmido",
+      "climate": "Subropical",
+      "scientificName": "Oxalis Trangularis"
+    },
+    {
+      "name": "Hibisco",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/hibisco.png",
+      "luminosity": "Luz forte",
+      "id": "96776b0e-0349-43bd-af0b-2702c1fc8ec6",
+      "growth": "Regular",
+      "family": "Malvaceae",
+      "irrigation": "Mantenha úmido entre as regas e pode secar entre as regas",
+      "climate": "Tropical",
+      "scientificName": "Hibiscus rosa-sinensis"
+    },
+    {
+      "name": "Cóleus",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/coleus.png",
+      "luminosity": "Meia sombra",
+      "id": "d2517c5e-052c-42d5-8f58-ccdd9f1f2df8",
+      "growth": "Regular",
+      "family": "Lamiaceae",
+      "irrigation": "Manter úmido",
+      "climate": "Tropical",
+      "scientificName": "Solenostemon sp"
+    },
+    {
+      "name": "Amor-perfeito",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/amorperfeito.png",
+      "luminosity": "Luz forte",
+      "id": "3104798f-4322-42a8-a108-ce8be57535f6",
+      "growth": "Regular",
+      "family": "Violaceae",
+      "irrigation": "Manter úmido",
+      "climate": "Tropical",
+      "scientificName": "Viola"
+    },
+    {
+      "name": "Hortência",
+      "img": "https://senac-pd1.github.io/FlorescerMedia/imagens/hortencia.png",
+      "luminosity": "Meia sombra",
+      "id": "c74a9008-0ab0-11ee-be56-0242ac120002",
+      "growth": "Regular",
+      "family": "Hydrangeaceae",
+      "irrigation": "Manter úmido",
+      "climate": "Subropical",
+      "scientificName": "Hydrangea macrophylla"
+    }
+  ]
+}
