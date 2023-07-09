@@ -3,8 +3,8 @@ import { Flower } from "../interfaces/interfaces";
 
 const fetchUserInfo = async () => {
   try {
-    const accessToken = localStorage.getItem("accessToken");
-    const userToken = localStorage.getItem("userToken");
+    const accessToken = localStorage.getItem("token");
+    const userToken = localStorage.getItem("id");
 
     if (!accessToken || !userToken) {
       console.error("Tokens não encontrados no localStorage.");
@@ -21,7 +21,8 @@ const fetchUserInfo = async () => {
 export const getFlowerNamesAndImages = async (): Promise<Flower[]> => {
   try {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NDc4NjIsImV4cCI6MTY4ODg1NTA2MiwiaWF0IjoxNjg4ODQ3ODYyLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.Gi5fwAJwy8EOzrOvbyJkDeQ8TyvV4OAf15s8X4N76qE";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NjQyMzcsImV4cCI6MTY4ODg3MTQzNywiaWF0IjoxNjg4ODY0MjM3LCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.I_MveCsPxrJZRnm-lGzOZhTmlaoDhzL4EIzfQZJoOVo";
+    const token2 = localStorage.getItem("token");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -30,6 +31,7 @@ export const getFlowerNamesAndImages = async (): Promise<Flower[]> => {
 
     const response = await axios.get("http://localhost:5049/planta", config);
     console.log(response.data);
+    console.log(token2);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -42,7 +44,7 @@ export const getFlowerByLuminosity = async (
 ): Promise<Flower[]> => {
   try {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NDc4NjIsImV4cCI6MTY4ODg1NTA2MiwiaWF0IjoxNjg4ODQ3ODYyLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.Gi5fwAJwy8EOzrOvbyJkDeQ8TyvV4OAf15s8X4N76qE";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NjQyMzcsImV4cCI6MTY4ODg3MTQzNywiaWF0IjoxNjg4ODY0MjM3LCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.I_MveCsPxrJZRnm-lGzOZhTmlaoDhzL4EIzfQZJoOVo";
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -64,7 +66,7 @@ export const getFlowerByLuminosity = async (
 export const getFlowerByName = async (name: string): Promise<Flower | null> => {
   try {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NDc4NjIsImV4cCI6MTY4ODg1NTA2MiwiaWF0IjoxNjg4ODQ3ODYyLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.Gi5fwAJwy8EOzrOvbyJkDeQ8TyvV4OAf15s8X4N76qE";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NjQyMzcsImV4cCI6MTY4ODg3MTQzNywiaWF0IjoxNjg4ODY0MjM3LCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.I_MveCsPxrJZRnm-lGzOZhTmlaoDhzL4EIzfQZJoOVo";
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -90,7 +92,7 @@ export const getFlowerByName = async (name: string): Promise<Flower | null> => {
 export const getFlowerById = async (id: string): Promise<Flower | null> => {
   try {
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NDc4NjIsImV4cCI6MTY4ODg1NTA2MiwiaWF0IjoxNjg4ODQ3ODYyLCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.Gi5fwAJwy8EOzrOvbyJkDeQ8TyvV4OAf15s8X4N76qE";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODg4NjQyMzcsImV4cCI6MTY4ODg3MTQzNywiaWF0IjoxNjg4ODY0MjM3LCJpc3MiOiJGbG9yZXNjZXJBUEkiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0In0.I_MveCsPxrJZRnm-lGzOZhTmlaoDhzL4EIzfQZJoOVo";
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

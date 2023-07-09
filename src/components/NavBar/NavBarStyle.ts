@@ -12,6 +12,7 @@ const moveUp = keyframes`
 }`;
 
 export const NavbarContainer = styled.div<{ open: boolean }>`
+  z-index: 999;
   nav {
     animation-name: ${moveUp};
     animation-duration: 0.7s;

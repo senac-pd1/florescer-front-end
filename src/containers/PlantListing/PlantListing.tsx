@@ -55,7 +55,7 @@ const PlantListing: React.FC = () => {
     setSelectedFlower(null);
   };
 
-  const handleSearch = async (query: string) => {
+  const handleSearch = async (query: any) => {
     if (!query || typeof query !== "string") {
       setErrorMessage("");
       setSearchedFlowers([]);
