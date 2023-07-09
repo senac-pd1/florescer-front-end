@@ -39,3 +39,25 @@ export const deletePlantMyGarden = (
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const addToWishlist = (
+  plantId: string,
+  userId: string,
+  token: string
+) => {
+  return axios.create({
+    baseURL: "https://florescerapi.azurewebsites.net/wishlist/Add",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const addToGarden = (plantId: string, userId: string, token: string) => {
+  return axios.create({
+    baseURL: "https://florescerapi.azurewebsites.net/meujardim/Add",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

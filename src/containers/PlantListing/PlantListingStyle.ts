@@ -32,15 +32,15 @@ export const FlowerItem = styled.div`
   align-items: center;
   position: relative;
   box-shadow: ${colorsVariables.boxShadow};
-  width: 50%;
 `;
 
 export const FlowerImg = styled.img`
-  width: 150px;
+  width: 180px;
   height: 150px;
+  margin-top: 5px;
   border-radius: 10px;
-  margin-top: -15px;
   box-shadow: ${colorsVariables.boxShadow};
+  cursor: pointer;
 `;
 
 export const FlowerName = styled.span`
@@ -50,9 +50,6 @@ export const FlowerName = styled.span`
   max-width: 150px;
 `;
 
-export const LikeFlower = styled.button`
-  background-color: transparent;
-  border: none;
-  width: 50px;
+export const ButtonsListing = styled.div`
   margin: 10px;
 `;
