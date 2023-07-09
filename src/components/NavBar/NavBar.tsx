@@ -34,8 +34,8 @@ const NavBar = ({ open }: NavBarProps) => {
     console.log("deslogado com sucesso!");
   };
 
-  const isProfilePage = location.pathname === "/profile";
   const isHomePage = location.pathname === "/";
+  const isLoggedIn = !!localStorage.getItem("token");
 
   return (
     <NavbarContainer open={open}>
@@ -47,41 +47,39 @@ const NavBar = ({ open }: NavBarProps) => {
         </LogoHeader>
 
         <ul>
-          {isHomePage && (
-            <>
-              <motion.li whileTap={{ scale: 1.1 }}>
-                <a href="#home" onClick={handleClick}>
-                  Home
-                </a>
-              </motion.li>
-              <motion.li whileTap={{ scale: 1.1 }}>
-                <a href="#about" onClick={handleClick}>
-                  Sobre
-                </a>
-              </motion.li>
-              <motion.li whileTap={{ scale: 1.1 }}>
-                <a href="#newsplants" onClick={handleClick}>
-                  Novas plantas
-                </a>
-              </motion.li>
-              <motion.li whileTap={{ scale: 1.1 }}>
-                <Link to="/login">Entrar</Link>
-              </motion.li>
-              <motion.li whileTap={{ scale: 1.1 }}>
-                <Link to="/profile">Perfil</Link>
-              </motion.li>
-            </>
-          )}
-
-          {isProfilePage && (
+          {isLoggedIn ? ( // Verifica se o usuário está logado
             <ContainerButtons>
               <motion.li whileTap={{ scale: 1.1 }}>
                 <Link to="/">Home</Link>
               </motion.li>
               <motion.li whileTap={{ scale: 1.1 }}>
+                <Link to="/list-plants">Novas plantas</Link>
+              </motion.li>
+              <motion.li whileTap={{ scale: 1.1 }}>
+                <Link to="/profile">Perfil</Link>
+              </motion.li>
+              <motion.li whileTap={{ scale: 1.1 }}>
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
               </motion.li>
             </ContainerButtons>
+          ) : (
+            isHomePage && ( // Verifica se está na página inicial
+              <>
+                <motion.li whileTap={{ scale: 1.1 }}>
+                  <a href="#home" onClick={handleClick}>
+                    Home
+                  </a>
+                </motion.li>
+                <motion.li whileTap={{ scale: 1.1 }}>
+                  <a href="#about" onClick={handleClick}>
+                    Sobre
+                  </a>
+                </motion.li>
+                <motion.li whileTap={{ scale: 1.1 }}>
+                  <Link to="/login">Entrar</Link>
+                </motion.li>
+              </>
+            )
           )}
         </ul>
       </nav>

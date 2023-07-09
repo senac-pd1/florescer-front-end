@@ -8,6 +8,9 @@ export const Container = styled.div`
   align-items: center;
   overflow-x: hidden;
   gap: 30px;
+  width: 85%;
+  margin: 20px auto;
+  border-radius: 10px;
 `;
 
 export const FlowerRow = styled.div`
