@@ -3,8 +3,8 @@ import { LikeButtonProps } from "../../interfaces/interfaces";
 import { FcLike, FcDislike } from "react-icons/fc";
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import { LikeFlower } from "./ButtonsStyle";
-
-import { addToWishlist } from "../../services/Api";
+import { addToGarden, addToWishlist } from "../../services/ApiProfile";
+import { Tooltip } from "@mui/material";
 
 const LikeButton: React.FC<LikeButtonProps> = ({
   id,
@@ -39,47 +39,77 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     ? "Remover da lista de desejos"
     : "Adicionar à lista de desejos";
 
-  const handleLikeClick = () => {
-    if (isLiked) {
-      console.log("Removido do jardim do usuário");
-    } else {
-      console.log("Adicionado ao jardim do usuário");
+  const addPlantInWishlist = async (userId: string, plantId: string) => {
+    const token = localStorage.getItem("token");
+    try {
+      if (token) {
+        const wishlistService = addToWishlist(plantId, userId, token);
+        const response = await wishlistService.post("", {
+          userId: userId,
+          plantaId: plantId,
+        });
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(`Erro  ${error}`);
+    }
+  };
+
+  const addPlantInGarden = async (userId: string, plantId: string) => {
+    const token = localStorage.getItem("token");
+    try {
+      if (token) {
+        const gardenService = addToGarden(plantId, userId, token);
+        const response = await gardenService.post("", {
+          userId: userId,
+          plantaId: plantId,
+        });
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(`Erro ${error}`);
+    }
+  };
+
+  const handleWishListCLick = () => {
+    const userId = localStorage.getItem("id");
+    if (userId) {
+      addPlantInWishlist(userId, id);
+      console.log("planta", id);
     }
 
     onClick();
   };
 
-  const handleWishlistClick = async () => {
-    if (isInWishlist) {
-      console.log("Removido da lista de desejos do usuário");
-    } else {
-      console.log("Adicionado à lista de desejos do usuário");
+  const handleGardenCLick = () => {
+    const userId = localStorage.getItem("id");
+    if (userId) {
+      addPlantInGarden(userId, id);
+      console.log("planta", id);
     }
-
-    const addedToWishlist = await addToWishlist(id);
-    if (addedToWishlist) {
-      onWishlistClick();
-    }
+    onClick();
   };
 
   return (
     <>
-      <LikeFlower
-        onClick={handleLikeClick}
-        onMouseEnter={handleLikeMouseEnter}
-        onMouseLeave={handleLikeMouseLeave}
-        title={likeTooltipText}
-      >
-        {isLiked ? <FcDislike /> : <FcLike />}
-      </LikeFlower>
-      <LikeFlower
-        onClick={handleWishlistClick}
-        onMouseEnter={handleWishlistMouseEnter}
-        onMouseLeave={handleWishlistMouseLeave}
-        title={wishlistTooltipText}
-      >
-        {isInWishlist ? <GrFormSubtract /> : <GrFormAdd />}
-      </LikeFlower>
+      <Tooltip title={likeTooltipText}>
+        <LikeFlower
+          onClick={handleWishListCLick}
+          onMouseEnter={handleLikeMouseEnter}
+          onMouseLeave={handleLikeMouseLeave}
+        >
+          {isLiked ? <FcDislike /> : <FcLike />}
+        </LikeFlower>
+      </Tooltip>
+      <Tooltip title={wishlistTooltipText}>
+        <LikeFlower
+          onClick={handleGardenCLick}
+          onMouseEnter={handleWishlistMouseEnter}
+          onMouseLeave={handleWishlistMouseLeave}
+        >
+          {isInWishlist ? <GrFormSubtract /> : <GrFormAdd />}
+        </LikeFlower>
+      </Tooltip>
     </>
   );
 };
