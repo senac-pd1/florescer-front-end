@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { LikeButtonProps } from "../../interfaces/interfaces";
 import { FcLike, FcDislike } from "react-icons/fc";
-import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
+import { GrFavorite, GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import { LikeFlower } from "./ButtonsStyle";
-import { addToGarden, addToWishlist } from "../../services/ApiProfile";
+import {
+  addToGarden,
+  deletePlantMyGarden,
+  addToWishlist,
+  deleteItemWishlist,
+} from "../../services/ApiProfile";
 import { Tooltip } from "@mui/material";
 
 const LikeButton: React.FC<LikeButtonProps> = ({
@@ -71,20 +76,53 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     }
   };
 
-  const handleWishListCLick = () => {
-    const userId = localStorage.getItem("id");
-    if (userId) {
-      addPlantInWishlist(userId, id);
-      console.log("planta", id);
+  const removePlantFromWishlist = async (userId: string, plantId: string) => {
+    const token = localStorage.getItem("token");
+    try {
+      if (token) {
+        const wishlistService = deleteItemWishlist(plantId, userId, token);
+        const response = await wishlistService.delete("");
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(`Erro ${error}`);
     }
-
-    onClick();
   };
 
-  const handleGardenCLick = () => {
+  const removePlantFromGarden = async (userId: string, plantId: string) => {
+    const token = localStorage.getItem("token");
+    try {
+      if (token) {
+        const gardenService = deletePlantMyGarden(plantId, userId, token);
+        const response = await gardenService.delete("");
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(`Erro ${error}`);
+    }
+  };
+
+  const handleWishListClick = async () => {
     const userId = localStorage.getItem("id");
     if (userId) {
-      addPlantInGarden(userId, id);
+      if (isInWishlist) {
+        await removePlantFromWishlist(userId, id);
+      } else {
+        await addPlantInWishlist(userId, id);
+      }
+      console.log("planta", id);
+    }
+    onWishlistClick();
+  };
+
+  const handleGardenClick = async () => {
+    const userId = localStorage.getItem("id");
+    if (userId) {
+      if (isLiked) {
+        await removePlantFromGarden(userId, id);
+      } else {
+        await addPlantInGarden(userId, id);
+      }
       console.log("planta", id);
     }
     onClick();
@@ -94,16 +132,16 @@ const LikeButton: React.FC<LikeButtonProps> = ({
     <>
       <Tooltip title={likeTooltipText}>
         <LikeFlower
-          onClick={handleWishListCLick}
+          onClick={handleGardenClick}
           onMouseEnter={handleLikeMouseEnter}
           onMouseLeave={handleLikeMouseLeave}
         >
-          {isLiked ? <FcDislike /> : <FcLike />}
+          {isLiked ? <FcDislike /> : <GrFavorite />}
         </LikeFlower>
       </Tooltip>
       <Tooltip title={wishlistTooltipText}>
         <LikeFlower
-          onClick={handleGardenCLick}
+          onClick={handleWishListClick}
           onMouseEnter={handleWishlistMouseEnter}
           onMouseLeave={handleWishlistMouseLeave}
         >

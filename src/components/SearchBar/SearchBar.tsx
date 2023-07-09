@@ -33,6 +33,10 @@ import {
 import Modal from "../Modal/Modal";
 import LikeButton from "../Buttons/Buttons";
 
+const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 const useButtonStates = () => {
   const [buttonStates, setButtonStates] = useState<{
     [key: string]: ButtonState;
@@ -73,7 +77,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [showSearchResults, setShowSearchResults] = useState(true);
   const { buttonStates, handleLikeClick, handleWishlistClick } =
     useButtonStates();
-  // Inside the SearchBar component, add the following:
   const [isFilterOptionsVisible, setFilterOptionsVisible] = useState(false);
 
   const toggleFilterOptions = () => {
@@ -86,7 +89,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const capitalizedQuery = capitalizeFirstLetter(query);
     if (!query && !selectedLuminosity) {
       if (showFilter) {
         setFoundFlowers([]);
@@ -106,7 +109,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onSearch(flowers);
         setShowSearchResults(true);
       } else {
-        const flower = await getFlowerByName(query);
+        const flower = await getFlowerByName(capitalizedQuery);
         if (flower) {
           setFoundFlowers([flower]);
           onSearch([flower]);
@@ -230,7 +233,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                       isInWishlist={buttonStates[flower.id]?.isInWishlist}
                       onClick={() => handleLikeClick(flower.id)}
                       onWishlistClick={() => handleWishlistClick(flower.id)}
-                      id={undefined}
+                      id={flower.id}
                     />
                   </ButtonsFound>
                 </FoundFlowerItem>
