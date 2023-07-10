@@ -88,7 +88,7 @@ const Modal: React.FC<ModalProps> = ({
             isInWishlist={isInWishlist}
             onClick={onModalLikeClick}
             onWishlistClick={onModalWishlistClick}
-            id={undefined}
+            id={flower.id}
           />
         </ButtonContainer>
       </ModalContainer>
@@ -97,4 +97,3 @@ const Modal: React.FC<ModalProps> = ({
 };
 
 export default Modal;
-
