@@ -37,7 +37,6 @@ export const PlantsCard = ({
   const { isOpen, toggle } = useModal();
   const handleChange = (val: boolean) => {
     setChecked(val);
-    console.log(val);
   };
 
   const toggleHandler = (id: string) => {
