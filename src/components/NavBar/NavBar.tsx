@@ -1,4 +1,9 @@
-import { LogoHeader, NavbarContainer } from "./NavBarStyle";
+import {
+  ContainerButtons,
+  LogoHeader,
+  LogoutButton,
+  NavbarContainer,
+} from "./NavBarStyle";
 import { motion } from "framer-motion";
 import logo from "./../../../src/assets/logoHeader.svg";
 import { Link, useLocation } from "react-router-dom";
@@ -22,8 +27,15 @@ const NavBar = ({ open }: NavBarProps) => {
     });
   };
 
-  const isProfilePage = location.pathname === "/profile";
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    window.location.href = "/";
+    console.log("deslogado com sucesso!");
+  };
+
   const isHomePage = location.pathname === "/";
+  const isLoggedIn = !!localStorage.getItem("token");
 
   return (
     <NavbarContainer open={open}>
@@ -35,33 +47,39 @@ const NavBar = ({ open }: NavBarProps) => {
         </LogoHeader>
 
         <ul>
-          {isHomePage && (
-            <>
+          {isLoggedIn ? ( // Verifica se o usuário está logado
+            <ContainerButtons>
               <motion.li whileTap={{ scale: 1.1 }}>
-                <a href="#home" onClick={handleClick}>
-                  Home
-                </a>
+                <Link to="/">Home</Link>
               </motion.li>
               <motion.li whileTap={{ scale: 1.1 }}>
-                <a href="#about" onClick={handleClick}>
-                  Sobre
-                </a>
-              </motion.li>
-              <motion.li whileTap={{ scale: 1.1 }}>
-                <a href="#newsplants" onClick={handleClick}>
-                  Novas plantas
-                </a>
+                <Link to="/list-plants">Novas plantas</Link>
               </motion.li>
               <motion.li whileTap={{ scale: 1.1 }}>
                 <Link to="/profile">Perfil</Link>
               </motion.li>
-            </>
-          )}
-
-          {isProfilePage && (
-            <motion.li whileTap={{ scale: 1.1 }}>
-              <Link to="/">Home</Link>
-            </motion.li>
+              <motion.li whileTap={{ scale: 1.1 }}>
+                <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
+              </motion.li>
+            </ContainerButtons>
+          ) : (
+            isHomePage && ( // Verifica se está na página inicial
+              <>
+                <motion.li whileTap={{ scale: 1.1 }}>
+                  <a href="#home" onClick={handleClick}>
+                    Home
+                  </a>
+                </motion.li>
+                <motion.li whileTap={{ scale: 1.1 }}>
+                  <a href="#about" onClick={handleClick}>
+                    Sobre
+                  </a>
+                </motion.li>
+                <motion.li whileTap={{ scale: 1.1 }}>
+                  <Link to="/login">Entrar</Link>
+                </motion.li>
+              </>
+            )
           )}
         </ul>
       </nav>

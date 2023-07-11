@@ -67,3 +67,21 @@ export const LogoHeader = styled.div`
     margin: 5px 0;
   }
 `;
+
+export const ContainerButtons = styled.nav`
+  display: flex;
+  aling-items: center;
+`;
+
+export const LogoutButton = styled.div`
+  background-color: ${colorsVariables.lightGreen};
+  padding: 5px 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  margin-right: 20px;
+  color &:hover {
+    background-color: ${colorsVariables.darkGreen};
+    border: 2px solid ${colorsVariables.lightGreen};
+    color: ${colorsVariables.lightGreen};
+  }
+`;
