@@ -34,7 +34,7 @@ export const ContainerImage = styled.div`
     font-weight: 200;
     color: ${colorsVariables.white};
     text-align: justify;
-    margin-right: 15px;
+    padding: 0 15px;
   }
 `;
 

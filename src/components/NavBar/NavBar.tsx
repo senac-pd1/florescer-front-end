@@ -1,13 +1,7 @@
-import {
-  ContainerButtons,
-  LogoHeader,
-  LogoutButton,
-  NavbarContainer,
-} from "./NavBarStyle";
+import { LogoHeader, LogoutButton, NavbarContainer } from "./NavBarStyle";
 import { motion } from "framer-motion";
 import logo from "./../../../src/assets/logoHeader.svg";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 interface NavBarProps {
   open: boolean;
@@ -47,8 +41,8 @@ const NavBar = ({ open }: NavBarProps) => {
         </LogoHeader>
 
         <ul>
-          {isLoggedIn ? ( // Verifica se o usuário está logado
-            <ContainerButtons>
+          {isLoggedIn ? (
+            <>
               <motion.li whileTap={{ scale: 1.1 }}>
                 <Link to="/">Home</Link>
               </motion.li>
@@ -61,9 +55,9 @@ const NavBar = ({ open }: NavBarProps) => {
               <motion.li whileTap={{ scale: 1.1 }}>
                 <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
               </motion.li>
-            </ContainerButtons>
+            </>
           ) : (
-            isHomePage && ( // Verifica se está na página inicial
+            isHomePage && (
               <>
                 <motion.li whileTap={{ scale: 1.1 }}>
                   <a href="#home" onClick={handleClick}>

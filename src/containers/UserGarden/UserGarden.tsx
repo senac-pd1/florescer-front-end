@@ -12,7 +12,6 @@ import {
 } from "./UserGardenStyle";
 import { PlantsCard } from "../../components/PlantsCard/PlantsCard";
 import { NotFoundCard } from "../../components/NotFoundCard/NotFoundCard";
-
 interface GardenProps {
   gardenPlants: PlanstInterface[];
   onDeletePlant: (plantId: string) => void;
@@ -22,7 +21,6 @@ const UserGarden: React.FC<GardenProps> = (props) => {
   const handleDeletePlant = (plantId: string) => {
     props.onDeletePlant(plantId);
   };
-
   return (
     <GardenContainer>
       <TitleGarden>Meu Jardim</TitleGarden>
@@ -58,15 +56,15 @@ const UserGarden: React.FC<GardenProps> = (props) => {
         </TextCard>
       </ContainerInfo>
       <PlantsContainer>
-        {props.gardenPlants.length > 0 ? (
+        {props.gardenPlants.length > 0 && props.gardenPlants != null ? (
           <>
             {props.gardenPlants.map((plants: PlanstInterface) => (
               <PlantsCard
-                key={plants.id}
-                name={plants.name}
-                image={plants.img}
+                key={plants?.id}
+                name={plants?.name}
+                image={plants?.img}
                 isWishlist={false}
-                plantId={plants.id}
+                plantId={plants?.id}
                 onDeletePlant={handleDeletePlant}
               />
             ))}

@@ -22,6 +22,10 @@ export const NavbarContainer = styled.div<{ open: boolean }>`
   }
   ul {
     display: flex;
+    align-items: center;
+    @media (max-width: 768px) {
+      align-items: flex-start;
+    }
   }
   ul li a {
     margin-right: 10px;
@@ -40,7 +44,7 @@ export const NavbarContainer = styled.div<{ open: boolean }>`
       top: 0;
       right: 0;
       height: 100vh;
-      width: 300px;
+      width: 200px;
       transition: ${({ open }) =>
         open ? "transform 0.3s ease-in-out" : "transform 0"};
     }
@@ -68,20 +72,29 @@ export const LogoHeader = styled.div`
   }
 `;
 
-export const ContainerButtons = styled.nav`
-  display: flex;
-  aling-items: center;
-`;
-
 export const LogoutButton = styled.div`
   background-color: ${colorsVariables.lightGreen};
   padding: 5px 10px;
   border: 2px solid transparent;
   border-radius: 10px;
   margin-right: 20px;
-  color &:hover {
+  color: ${colorsVariables.darkGreen};
+  &:hover {
     background-color: ${colorsVariables.darkGreen};
     border: 2px solid ${colorsVariables.lightGreen};
     color: ${colorsVariables.lightGreen};
+  }
+  @media (max-width: 768px) {
+    background-color: ${colorsVariables.darkGreen};
+    padding: 5px 10px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    margin-right: 20px;
+    color: ${colorsVariables.lightGreen};
+    &:hover {
+      background-color: ${colorsVariables.lightGreen};
+      border: 2px solid ${colorsVariables.darkGreen};
+      color: ${colorsVariables.darkGreen};
+    }
   }
 `;

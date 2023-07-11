@@ -3,7 +3,7 @@ import { colorsVariables, uiVariables } from "./../../style/VariablesStyle";
 
 export const PlantsGardenCard = styled.div`
   ul {
-    width: 200px;
+    width: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,10 +32,10 @@ export const BtnRemoveAndNamePlant = styled.li`
     font-size: 16px;
     color: ${colorsVariables.green};
     font-weight: 600;
-    margin: 0 15px;
+    margin-left: 15px;
   }
   button {
-    margin: 0 15px;
+    margin-right: 15px;
     color: ${colorsVariables.red};
     border: none;
     background-color: transparent;
