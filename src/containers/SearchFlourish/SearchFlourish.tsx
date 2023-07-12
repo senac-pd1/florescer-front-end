@@ -192,14 +192,6 @@ const SearchFlourish: React.FC<MapProps> = ({ apiKey }) => {
         <ButtonSubmit onClick={handleSearch}>Buscar</ButtonSubmit>
       </SearchContainer>
       <MapContainer ref={mapRef}></MapContainer>
-      {/* <ul>
-        {flourish.map((flourish, index) => (
-          <li key={index}>
-            <strong>{flourish.name}</strong>
-            <p>{flourish.address}</p>
-          </li>
-        ))}
-      </ul> */}
     </ContainerSearchFlourish>
   );
 };

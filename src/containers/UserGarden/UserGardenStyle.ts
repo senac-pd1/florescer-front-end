@@ -33,6 +33,14 @@ export const CircleShapeLeft = styled.span`
   background: ${colorsVariables.mediumGreenTransparent};
   shape-outside: inset(20px 5px 30px 10px);
   opacity: 0.4;
+  @media (max-width: 768px) {
+    width: 350px;
+    height: 350px;
+  }
+  @media (max-width: 450px) {
+    width: 150px;
+    height: 150px;
+  }
 `;
 
 export const CircleShapeRight = styled.span`
@@ -47,6 +55,14 @@ export const CircleShapeRight = styled.span`
   background: ${colorsVariables.mediumGreenTransparent};
   shape-outside: inset(20px 5px 30px 10px);
   opacity: 0.6;
+  @media (max-width: 768px) {
+    width: 350px;
+    height: 350px;
+  }
+  @media (max-width: 450px) {
+    width: 150px;
+    height: 150px;
+  }
 `;
 
 export const ContainerInfo = styled.div`
