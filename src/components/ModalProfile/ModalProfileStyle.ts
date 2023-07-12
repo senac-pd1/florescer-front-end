@@ -4,8 +4,7 @@ export const ModalBox = styled.div`
   background: ${colorsVariables.white};
   border-radius: 8px;
   box-shadow: 0 2px 8px #333;
-  width: 800px;
-  height: 600px;
+  max-width: 900px;
   position: fixed;
   left: 50%;
   padding: 24px;
@@ -14,6 +13,7 @@ export const ModalBox = styled.div`
   z-index: 11;
   transition-duration: 5s;
   transition-delay: 2s;
+  margin: 0 20px;
 `;
 
 export const ModalOverlay = styled.div`
