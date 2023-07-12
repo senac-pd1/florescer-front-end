@@ -8,6 +8,13 @@ export const getWishlist = (userId: string, token: string) =>
     },
   });
 
+export const getPlantById = (plantId: string, token: string) =>
+  axios.create({
+    baseURL: `https://florescerapi.azurewebsites.net/plantaById/${plantId}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 export const deleteItemWishlist = (
   userId: string,
   token: string,

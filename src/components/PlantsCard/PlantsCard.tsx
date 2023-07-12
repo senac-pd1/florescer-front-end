@@ -13,6 +13,9 @@ import {
   deletePlantMyGarden,
 } from "../../services/ApiProfile";
 import { Tooltip } from "@mui/material";
+import { ModalProfile } from "../ModalProfile/ModalProfile";
+import { useModal } from "../../hooks/useModal";
+import { PlantsProfileDetail } from "../PlantsProfileDetail/PlantsProfileDetai";
 
 interface PlantsCardProps {
   image: string;
@@ -30,10 +33,15 @@ export const PlantsCard = ({
   onDeletePlant,
 }: PlantsCardProps) => {
   const [checked, setChecked] = useState(true);
-
+  const [selectId, setSelectId] = useState("");
+  const { isOpen, toggle } = useModal();
   const handleChange = (val: boolean) => {
     setChecked(val);
-    console.log(val);
+  };
+
+  const toggleHandler = (id: string) => {
+    setSelectId(id);
+    toggle();
   };
 
   const handleDeleteClick = () => {
@@ -101,7 +109,7 @@ export const PlantsCard = ({
     <PlantsGardenCard>
       <ul>
         <li>
-          <img src={image} alt="imagem da planta" />
+          <img src={image} alt="imagem da planta"></img>
         </li>
         <BtnRemoveAndNamePlant>
           <h3>{name}</h3>
@@ -137,9 +145,18 @@ export const PlantsCard = ({
               />
             </ContainerToggle>
           )}
-          <button>+ informações</button>
+          <button
+            onClick={() => {
+              toggleHandler(plantId);
+            }}
+          >
+            + informações
+          </button>
         </BtnInfosAndToggle>
       </ul>
+      <ModalProfile isOpen={isOpen} toggle={toggle}>
+        <PlantsProfileDetail id={selectId}></PlantsProfileDetail>
+      </ModalProfile>
     </PlantsGardenCard>
   );
 };

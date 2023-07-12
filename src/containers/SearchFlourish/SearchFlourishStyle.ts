@@ -19,8 +19,11 @@ export const ContainerSearchFlourish = styled.section`
   position: relative;
 `;
 export const SearchContainer = styled.div`
-  margin: 40px auto;
-  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 `;
 
 export const InputSearch = styled.input`
@@ -29,7 +32,7 @@ export const InputSearch = styled.input`
   border-radius: 10px;
   border: 2px solid ${colorsVariables.green};
   background-color: transparent;
-  margin: 0 15px;
+  margin: 20px 15px;
   font-size: 16px;
   color: ${colorsVariables.black}
   font-weight: 700;
@@ -55,6 +58,7 @@ export const ButtonSubmit = styled.button`
   color: ${colorsVariables.white};
   font-size: 16px;
   font-weight: 700;
+  margin: 20px 0;
 `;
 
 export const MapContainer = styled.div`
