@@ -64,7 +64,7 @@ const RegisterPage = () => {
 
     // Enviar a requisição para o backend
     axios
-      .post("https://florescerapi.azurewebsites.net/registro", {
+      .post("http://localhost:5049/registro", {
         email: email,
         password: senha,
         confirmPassword: senha,

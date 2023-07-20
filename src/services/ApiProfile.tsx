@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getWishlist = (userId: string, token: string) =>
   axios.create({
-    baseURL: `https://florescerapi.azurewebsites.net/wishlist/${userId}`,
+    baseURL: `http://localhost:5049/wishlist/${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -10,7 +10,7 @@ export const getWishlist = (userId: string, token: string) =>
 
 export const getPlantById = (plantId: string, token: string) =>
   axios.create({
-    baseURL: `https://florescerapi.azurewebsites.net/plantaById/${plantId}`,
+    baseURL: `http://localhost:5049/plantaById/${plantId}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -21,7 +21,7 @@ export const deleteItemWishlist = (
   plantsId: string
 ) =>
   axios.create({
-    baseURL: `https://florescerapi.azurewebsites.net/wishlist/Remove`,
+    baseURL: `http://localhost:5049/wishlist/Remove`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -29,7 +29,7 @@ export const deleteItemWishlist = (
 
 export const getMyGarden = (userId: string, token: string) =>
   axios.create({
-    baseURL: `https://florescerapi.azurewebsites.net/meujardim/${userId}`,
+    baseURL: `http://localhost:5049/meujardim/${userId}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -41,7 +41,7 @@ export const deletePlantMyGarden = (
   plantsId: string
 ) =>
   axios.create({
-    baseURL: `https://florescerapi.azurewebsites.net/meujardim/Remove`,
+    baseURL: `http://localhost:5049/meujardim/Remove`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -53,7 +53,7 @@ export const addToWishlist = (
   token: string
 ) => {
   return axios.create({
-    baseURL: "https://florescerapi.azurewebsites.net/wishlist/Add",
+    baseURL: "http://localhost:5049/wishlist/Add",
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -62,7 +62,7 @@ export const addToWishlist = (
 
 export const addToGarden = (plantId: string, userId: string, token: string) => {
   return axios.create({
-    baseURL: "https://florescerapi.azurewebsites.net/meujardim/Add",
+    baseURL: "http://localhost:5049/meujardim/Add",
     headers: {
       Authorization: `Bearer ${token}`,
     },

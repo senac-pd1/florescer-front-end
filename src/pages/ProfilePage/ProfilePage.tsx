@@ -15,7 +15,7 @@ import SearchFlourish from "../../containers/SearchFlourish/SearchFlourish";
 const ProfilePage = () => {
   const [wishlist, setWishlist] = useState([]);
   const [garden, setGarden] = useState([]);
-  const apiKey = "AIzaSyCfwZVHe-xEmqaDL3w_uDF1lZvL5P3E0Ck";
+  const apiKey = "sua-api-key-aqui";
 
   const getWishlistRequest = async (userId: string | any) => {
     const token = localStorage.getItem("token");

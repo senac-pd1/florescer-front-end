@@ -51,7 +51,7 @@ const LoginPage = () => {
 
     // Enviar a requisição para o backend
     axios
-      .post("https://florescerapi.azurewebsites.net/login", {
+      .post("http://localhost:5049/login", {
         email: email,
         password: senha,
       })

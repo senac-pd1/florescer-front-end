@@ -9,10 +9,7 @@ export const getFlowerNamesAndImages = async (): Promise<Flower[]> => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await axios.get(
-      "https://florescerapi.azurewebsites.net/planta",
-      config
-    );
+    const response = await axios.get("http://localhost:5049/planta", config);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -32,7 +29,7 @@ export const getFlowerByLuminosity = async (
     };
 
     const response = await axios.get(
-      `https://florescerapi.azurewebsites.net/plantaByLuminosity/${luminosity}`,
+      `http://localhost:5049/plantaByLuminosity/${luminosity}`,
       config
     );
     return response.data;
@@ -52,7 +49,7 @@ export const getFlowerByName = async (name: string): Promise<Flower | null> => {
     };
 
     const response = await axios.get(
-      `https://florescerapi.azurewebsites.net/plantaByName/${name}`,
+      `http://localhost:5049/plantaByName/${name}`,
       config
     );
 
@@ -77,7 +74,7 @@ export const getFlowerById = async (id: string): Promise<Flower | null> => {
     };
 
     const response = await axios.get(
-      `https://florescerapi.azurewebsites.net/plantaById/${id}`,
+      `http://localhost:5049/plantaById/${id}`,
       config
     );
 
